@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visor 360° Mejorado</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .viewer {
+      position: relative;
+      width: 50%;
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: grab;
+      border-radius: 1rem;
+    }
+
+    .viewer img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .viewer:active {
+      cursor: grabbing;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
+  
+  <!-- Visor del producto -->
+  <div class="viewer bg-white shadow-lg rounded-md p-4 mb-4" id="productViewer">
+    <img src="images/red/1.png" alt="Producto en 360" id="productImage">
+  </div>
+
+  <!-- Botones para cambiar de color -->
+  <div class="flex space-x-4">
+    <button class="bg-white text-black px-4 py-2 rounded" data-color="red">Blanco</button>
+    <button class="bg-blue-500 text-white px-4 py-2 rounded" data-color="blue">Azul</button>
+    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="green">Rojo</button>
+  </div>
+
+  <script>
+    let currentFrame = 1;
+    const totalFrames = 30; 
+    let isDragging = false;
+    let startX = 0;
+    let velocity = 0; // Velocidad del arrastre
+    const productImage = document.getElementById('productImage');
+    let currentColor = 'red'; 
+    
+    productImage.addEventListener('dragstart', (event) => {
+      event.preventDefault(); 
+    });
+
+    const viewer = document.getElementById('productViewer');
+
+    // --- Controladores para el mouse ---
+    viewer.addEventListener('mousedown', (event) => {
+      isDragging = true;
+      startX = event.pageX;
+      viewer.style.cursor = "grabbing";
+    });
+
+    viewer.addEventListener('mouseup', () => {
+      isDragging = false;
+      viewer.style.cursor = "grab";
+    });
+
+    viewer.addEventListener('mouseleave', () => {
+      isDragging = false;
+      viewer.style.cursor = "grab";
+    });
+
+    viewer.addEventListener('mousemove', (event) => {
+      if (isDragging) {
+        const diff = event.pageX - startX;
+        handleMouseDrag(diff);
+        startX = event.pageX;
+      }
+    });
+
+    function handleMouseDrag(diff) {
+      velocity = Math.abs(diff) / 50; // Aumentar la velocidad según el arrastre
+      const framesToMove = Math.min(Math.max(Math.floor(velocity), 1), 5); // Limitar el número de frames a mover (1-5)
+
+      if (Math.abs(diff) > 5) {
+        currentFrame += diff < 0 ? framesToMove : -framesToMove;
+
+        if (currentFrame > totalFrames) currentFrame = 1;
+        if (currentFrame < 1) currentFrame = totalFrames;
+
+        updateImage();
+      }
+    }
+
+    // --- Controladores para dispositivos táctiles ---
+    viewer.addEventListener('touchstart', (event) => {
+      isDragging = true;
+      startX = event.touches[0].pageX;
+    });
+
+    viewer.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
+    viewer.addEventListener('touchmove', (event) => {
+      if (isDragging) {
+        const diff = event.touches[0].pageX - startX;
+        handleTouchDrag(diff);
+        startX = event.touches[0].pageX;
+      }
+    });
+
+    function handleTouchDrag(diff) {
+      velocity = Math.abs(diff) / 100;
+      const framesToMove = Math.min(Math.max(Math.floor(velocity), 1), 5);
+
+      if (Math.abs(diff) > 5) {
+        currentFrame += diff < 0 ? framesToMove : -framesToMove;
+
+        if (currentFrame > totalFrames) currentFrame = 1;
+        if (currentFrame < 1) currentFrame = totalFrames;
+
+        updateImage();
+      }
+    }
+
+    // Actualizar la imagen
+    function updateImage() {
+      productImage.src = `images/${currentColor}/${currentFrame}.png`;
+    }
+
+    // Cambiar color
+    const colorButtons = document.querySelectorAll('button[data-color]');
+    colorButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        currentColor = button.getAttribute('data-color');
+        /*currentFrame = 1; */
+        updateImage();
+      });
+    });
+  </script>
+
+</body>
+</html>
