@@ -30,18 +30,18 @@
   
   <!-- Visor del producto -->
   <div class="viewer bg-white shadow-lg rounded-md p-4 mb-4" id="productViewer">
-    <img src="images/white/1.png" alt="Producto en 360" id="productImage">
+    <img src="images/white/3.png" alt="Producto en 360" id="productImage">
   </div>
 
   <!-- Botones para cambiar de color -->
   <div class="flex space-x-4">
-    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="white">Rojo 6</button>
-    <button class="bg-blue-500 text-white px-4 py-2 rounded" data-color="blue">Azul</button>
-    <button class="bg-green-500 text-white px-4 py-2 rounded" data-color="green">Verde</button>
+    <button class="bg-white shadow-md text-white px-3 rounded-full" data-color="white"></button>
+    <button class="bg-blue-500 shadow-md text-white px-3 rounded-full" data-color="blue"></button>
+    <button class="bg-red-500 shadow-md text-white px-3 py-3 rounded-full" data-color="green"></button>
   </div>
 
   <script>
-    let currentFrame = 1;
+    let currentFrame = 3;
     const totalFrames = 30; 
     let isDragging = false;
     let startX = 0;
@@ -155,7 +155,7 @@
     colorButtons.forEach(button => {
       button.addEventListener('click', () => {
         currentColor = button.getAttribute('data-color');
-        currentFrame = 1; 
+        /*currentFrame = 1; */
         updateImage();
       });
     });

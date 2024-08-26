@@ -30,12 +30,12 @@
   
   <!-- Visor del producto -->
   <div class="viewer bg-white shadow-lg rounded-md p-4 mb-4" id="productViewer">
-    <img src="images/red/3.png" alt="Producto en 360" id="productImage">
+    <img src="images/white/3.png" alt="Producto en 360" id="productImage">
   </div>
 
   <!-- Botones para cambiar de color -->
   <div class="flex space-x-4">
-    <button class="bg-white shadow-md text-white px-3 rounded-full" data-color="red"></button>
+    <button class="bg-white shadow-md text-white px-3 rounded-full" data-color="white"></button>
     <button class="bg-blue-500 shadow-md text-white px-3 rounded-full" data-color="blue"></button>
     <button class="bg-red-500 shadow-md text-white px-3 py-3 rounded-full" data-color="green"></button>
   </div>
@@ -48,7 +48,7 @@
     let accumulatedMovement = 0; // Movimiento acumulado para mayor precisión
     const frameChangeThreshold = 20; // CAMBIO: Ajustamos el umbral para hacer el touch más suave
     const productImage = document.getElementById('productImage');
-    let currentColor = 'red'; 
+    let currentColor = 'white'; 
     
     productImage.addEventListener('dragstart', (event) => {
       event.preventDefault(); 
