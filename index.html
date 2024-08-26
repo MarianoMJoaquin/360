@@ -30,19 +30,19 @@
   
   <!-- Visor del producto -->
   <div class="viewer bg-white shadow-lg rounded-md p-4 mb-4" id="productViewer">
-    <img src="images/red/frame_1.jpg" alt="Producto en 360" id="productImage">
+    <img src="images/red/1.png" alt="Producto en 360" id="productImage">
   </div>
 
   <!-- Botones para cambiar de color -->
   <div class="flex space-x-4">
-    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="red">Rojo</button>
+    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="red">Rojo 2</button>
     <button class="bg-blue-500 text-white px-4 py-2 rounded" data-color="blue">Azul</button>
     <button class="bg-green-500 text-white px-4 py-2 rounded" data-color="green">Verde</button>
   </div>
 
   <script>
     let currentFrame = 1;
-    const totalFrames = 36; 
+    const totalFrames = 30; 
     let isDragging = false;
     let startX = 0;
     let accumulatedMovement = 0; // Movimiento acumulado para mayor precisión
@@ -148,7 +148,7 @@
 
     // Función para actualizar la imagen
     function updateImage() {
-      productImage.src = `images/${currentColor}/frame_${currentFrame}.jpg`;
+      productImage.src = `images/${currentColor}/${currentFrame}.png`;
     }
 
     // Cambiar color
