@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Visor 360° Mejorado - Touch Preciso</title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -36,9 +35,9 @@
 
   <!-- Botones para cambiar de color -->
   <div class="flex space-x-4">
-    <button class="bg-white text-black px-4 py-2 rounded" data-color="red">Blanco</button>
+    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="red">Rojooooo</button>
     <button class="bg-blue-500 text-white px-4 py-2 rounded" data-color="blue">Azul</button>
-    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="green">Rojo</button>
+    <button class="bg-green-500 text-white px-4 py-2 rounded" data-color="green">Verde</button>
   </div>
 
   <script>
@@ -88,10 +87,12 @@
 
       // Manejamos el movimiento acumulado para ambos lados
       if (Math.abs(accumulatedMovement) > frameChangeThreshold) {
-        const framesToMove = Math.floor(accumulatedMovement / frameChangeThreshold);
-        currentFrame -= framesToMove; // Invertimos el signo para cambiar el sentido de giro
+        const framesToMove = Math.floor(Math.abs(accumulatedMovement) / frameChangeThreshold);
 
-        // Ciclar a través de los frames
+        // CAMBIO: Usamos diff para decidir hacia qué dirección moverse
+        currentFrame += (diff > 0) ? -framesToMove : framesToMove; 
+
+        // CICLAR: Si el frame excede los límites, lo hacemos ciclar
         if (currentFrame > totalFrames) currentFrame = 1;
         if (currentFrame < 1) currentFrame = totalFrames;
 
@@ -128,10 +129,12 @@
 
       // Manejamos el movimiento acumulado para touch
       if (Math.abs(accumulatedMovement) > frameChangeThreshold) {
-        const framesToMove = Math.floor(accumulatedMovement / frameChangeThreshold);
-        currentFrame -= framesToMove; // Invertimos el signo para cambiar el sentido de giro
+        const framesToMove = Math.floor(Math.abs(accumulatedMovement) / frameChangeThreshold);
 
-        // Ciclar a través de los frames
+        // CAMBIO: Usamos diff para decidir hacia qué dirección moverse
+        currentFrame += (diff > 0) ? -framesToMove : framesToMove; 
+
+        // CICLAR: Si el frame excede los límites, lo hacemos ciclar
         if (currentFrame > totalFrames) currentFrame = 1;
         if (currentFrame < 1) currentFrame = totalFrames;
 
