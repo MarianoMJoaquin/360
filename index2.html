@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visor 360° Mejorado - Touch Optimizado</title>
+  <title>Visor 360° con Precarga y Touch</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .viewer {
@@ -24,40 +24,100 @@
     .viewer:active {
       cursor: grabbing;
     }
+
+    /* Spinner para mostrar mientras se cargan las imágenes */
+    .spinner {
+      border: 8px solid #f3f3f3; /* Gris claro */
+      border-top: 8px solid #3498db; /* Azul */
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1.5s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
   
-  <!-- Visor del producto -->
+  <!-- Visor del producto con un spinner para mostrar mientras se cargan las imágenes -->
   <div class="viewer bg-white shadow-lg rounded-md p-4 mb-4" id="productViewer">
-    <img src="images/white/3.png" alt="Producto en 360" id="productImage">
+    <div id="spinner" class="spinner"></div>
+    <img src="images/white/1.png" alt="Producto en 360" id="productImage" style="display:none;">
   </div>
 
   <!-- Botones para cambiar de color -->
   <div class="flex space-x-4">
-    <button class="bg-white shadow-md text-white px-3 rounded-full" data-color="white"></button>
-    <button class="bg-blue-500 shadow-md text-white px-3 rounded-full" data-color="blue"></button>
-    <button class="bg-red-500 shadow-md text-white px-3 py-3 rounded-full" data-color="green"></button>
+    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="white">Rojo</button>
+    <button class="bg-blue-500 text-white px-4 py-2 rounded" data-color="blue">Azul</button>
+    <button class="bg-green-500 text-white px-4 py-2 rounded" data-color="green">Verde</button>
   </div>
 
   <script>
-    let currentFrame = 3;
+    let currentFrame = 1;
     const totalFrames = 30; 
     let isDragging = false;
     let startX = 0;
     let accumulatedMovement = 0; // Movimiento acumulado para mayor precisión
-    const frameChangeThreshold = 20; // CAMBIO: Ajustamos el umbral para hacer el touch más suave
+    const frameChangeThreshold = 20; // Ajustamos el umbral para hacer el touch más suave
     const productImage = document.getElementById('productImage');
     let currentColor = 'white'; 
-    
+    let imagesLoaded = false;
+
+    // Preload de todas las imágenes
+    let imageCache = {};
+    let imagesToLoad = [];
+
+    function preloadImages() {
+      for (let i = 1; i <= totalFrames; i++) {
+        const imgSrc = `images/${currentColor}/${i}.png`;
+        imagesToLoad.push(imgSrc);
+      }
+
+      loadNextImage(); // Iniciar la precarga
+    }
+
+    function loadNextImage() {
+      if (imagesToLoad.length === 0) {
+        // Todas las imágenes se han cargado
+        document.getElementById('spinner').style.display = 'none';
+        productImage.style.display = 'block';
+        imagesLoaded = true;
+        return;
+      }
+
+      const nextImageSrc = imagesToLoad.shift();
+      const img = new Image();
+      img.src = nextImageSrc;
+
+      img.onload = function() {
+        imageCache[nextImageSrc] = img;
+        loadNextImage(); // Recursivamente cargar la siguiente imagen
+      };
+
+      img.onerror = function() {
+        console.error('Error cargando la imagen:', nextImageSrc);
+        loadNextImage(); // Continuar cargando las siguientes aunque falle una
+      };
+    }
+
+    // Ejecutar la precarga de imágenes cuando se carga la página
+    window.onload = function() {
+      preloadImages();
+    };
+
     productImage.addEventListener('dragstart', (event) => {
       event.preventDefault(); 
     });
 
     const viewer = document.getElementById('productViewer');
 
-    // --- Controladores para el mouse (computadoras) ---
+    // --- Controladores para el mouse ---
     viewer.addEventListener('mousedown', (event) => {
+      if (!imagesLoaded) return; // No permitir interacción hasta que las imágenes se carguen
       isDragging = true;
       startX = event.pageX;
       viewer.style.cursor = "grabbing";
@@ -81,34 +141,27 @@
       }
     });
 
-    // --- Función específica para manejar el arrastre con el mouse (computadoras) ---
     function handleMouseDrag(diff) {
-      accumulatedMovement += diff; // Acumulamos el movimiento del mouse
+      accumulatedMovement += diff;
 
       if (Math.abs(accumulatedMovement) > frameChangeThreshold) {
         const framesToMove = Math.floor(Math.abs(accumulatedMovement) / frameChangeThreshold);
-
-        // Usamos diff para decidir hacia qué dirección moverse
         currentFrame += (diff > 0) ? -framesToMove : framesToMove;
 
-        // CICLAR: Si el frame excede los límites, lo hacemos ciclar
         if (currentFrame > totalFrames) currentFrame = 1;
         if (currentFrame < 1) currentFrame = totalFrames;
 
         updateImage();
-
-        // Restamos el acumulado correctamente
         accumulatedMovement = accumulatedMovement % frameChangeThreshold;
       }
     }
 
-    // --- Controladores mejorados para dispositivos táctiles ---
+    // --- Controladores para dispositivos táctiles (touch) ---
     viewer.addEventListener('touchstart', (event) => {
-      if (event.touches.length === 1) { // Solo manejamos un toque
-        isDragging = true;
-        startX = event.touches[0].pageX;
-        accumulatedMovement = 0; // Reiniciamos el acumulador de movimiento
-      }
+      if (!imagesLoaded || event.touches.length !== 1) return; // No permitir interacción hasta que las imágenes se carguen
+      isDragging = true;
+      startX = event.touches[0].pageX; // Capturamos la posición inicial del primer toque
+      accumulatedMovement = 0; // Reiniciamos el acumulador de movimiento
     });
 
     viewer.addEventListener('touchend', () => {
@@ -123,39 +176,32 @@
       }
     });
 
-    // --- Función específica para manejar el arrastre con touch optimizado ---
     function handleTouchDrag(diff) {
-      accumulatedMovement += diff; // Acumulamos el movimiento del dedo
+      accumulatedMovement += diff;
 
-      // CAMBIO: Ajustamos el manejo del acumulador y reducimos la sensibilidad del touch
       if (Math.abs(accumulatedMovement) > frameChangeThreshold) {
         const framesToMove = Math.floor(Math.abs(accumulatedMovement) / frameChangeThreshold);
-
-        // Usamos diff para decidir hacia qué dirección moverse
         currentFrame += (diff > 0) ? -framesToMove : framesToMove;
 
-        // CICLAR: Si el frame excede los límites, lo hacemos ciclar
         if (currentFrame > totalFrames) currentFrame = 1;
         if (currentFrame < 1) currentFrame = totalFrames;
 
         updateImage();
-
-        // Restamos el acumulado correctamente
         accumulatedMovement = accumulatedMovement % frameChangeThreshold;
       }
     }
 
-    // Función para actualizar la imagen
     function updateImage() {
       productImage.src = `images/${currentColor}/${currentFrame}.png`;
     }
 
-    // Cambiar color
+    // Cambiar color y recargar imágenes
     const colorButtons = document.querySelectorAll('button[data-color]');
     colorButtons.forEach(button => {
       button.addEventListener('click', () => {
         currentColor = button.getAttribute('data-color');
-        /*currentFrame = 1; */
+        currentFrame = 1; 
+        preloadImages(); // Cargar las imágenes del nuevo color
         updateImage();
       });
     });
