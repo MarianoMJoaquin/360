@@ -200,7 +200,7 @@
     colorButtons.forEach(button => {
       button.addEventListener('click', () => {
         currentColor = button.getAttribute('data-color');
-        currentFrame = 1; 
+        /*currentFrame = 1; */
         preloadImages(); // Cargar las imágenes del nuevo color
         updateImage();
       });
