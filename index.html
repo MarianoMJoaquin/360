@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visor 360° Mejorado - Touch Preciso</title>
+  <title>Visor 360° Mejorado - Touch Optimizado</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .viewer {
@@ -35,7 +35,7 @@
 
   <!-- Botones para cambiar de color -->
   <div class="flex space-x-4">
-    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="red">Rojo 2</button>
+    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="red">Rojo 3</button>
     <button class="bg-blue-500 text-white px-4 py-2 rounded" data-color="blue">Azul</button>
     <button class="bg-green-500 text-white px-4 py-2 rounded" data-color="green">Verde</button>
   </div>
@@ -46,7 +46,7 @@
     let isDragging = false;
     let startX = 0;
     let accumulatedMovement = 0; // Movimiento acumulado para mayor precisión
-    const frameChangeThreshold = 10; // Cuántos píxeles se necesitan para cambiar de frame
+    const frameChangeThreshold = 20; // CAMBIO: Ajustamos el umbral para hacer el touch más suave
     const productImage = document.getElementById('productImage');
     let currentColor = 'red'; 
     
@@ -85,11 +85,10 @@
     function handleMouseDrag(diff) {
       accumulatedMovement += diff; // Acumulamos el movimiento del mouse
 
-      // Si el movimiento acumulado supera el umbral, cambiamos los frames
       if (Math.abs(accumulatedMovement) > frameChangeThreshold) {
         const framesToMove = Math.floor(Math.abs(accumulatedMovement) / frameChangeThreshold);
 
-        // Usamos diff para decidir hacia qué dirección moverse (positivo: derecha, negativo: izquierda)
+        // Usamos diff para decidir hacia qué dirección moverse
         currentFrame += (diff > 0) ? -framesToMove : framesToMove;
 
         // CICLAR: Si el frame excede los límites, lo hacemos ciclar
@@ -98,16 +97,16 @@
 
         updateImage();
 
-        // Restar el movimiento acumulado correctamente para evitar desincronización
+        // Restamos el acumulado correctamente
         accumulatedMovement = accumulatedMovement % frameChangeThreshold;
       }
     }
 
-    // --- Controladores para dispositivos táctiles (mejorados) ---
+    // --- Controladores mejorados para dispositivos táctiles ---
     viewer.addEventListener('touchstart', (event) => {
       if (event.touches.length === 1) { // Solo manejamos un toque
         isDragging = true;
-        startX = event.touches[0].pageX; // Capturamos la posición inicial del primer toque
+        startX = event.touches[0].pageX;
         accumulatedMovement = 0; // Reiniciamos el acumulador de movimiento
       }
     });
@@ -117,20 +116,20 @@
     });
 
     viewer.addEventListener('touchmove', (event) => {
-      if (isDragging && event.touches.length === 1) { // Manejamos solo el primer dedo que toca la pantalla
+      if (isDragging && event.touches.length === 1) {
         const diff = event.touches[0].pageX - startX; // Calculamos la diferencia entre la posición inicial y la actual
         handleTouchDrag(diff);
         startX = event.touches[0].pageX; // Actualizamos la posición inicial al nuevo punto de arrastre
       }
     });
 
-    // --- Función específica para manejar el arrastre con touch mejorado ---
+    // --- Función específica para manejar el arrastre con touch optimizado ---
     function handleTouchDrag(diff) {
       accumulatedMovement += diff; // Acumulamos el movimiento del dedo
 
-      // Manejamos el movimiento acumulado para touch
+      // CAMBIO: Ajustamos el manejo del acumulador y reducimos la sensibilidad del touch
       if (Math.abs(accumulatedMovement) > frameChangeThreshold) {
-        const framesToMove = Math.floor(Math.abs(accumulatedMovement) / frameChangeThreshold); // Cuántos frames debemos mover
+        const framesToMove = Math.floor(Math.abs(accumulatedMovement) / frameChangeThreshold);
 
         // Usamos diff para decidir hacia qué dirección moverse
         currentFrame += (diff > 0) ? -framesToMove : framesToMove;
@@ -139,9 +138,9 @@
         if (currentFrame > totalFrames) currentFrame = 1;
         if (currentFrame < 1) currentFrame = totalFrames;
 
-        updateImage(); // Actualizamos la imagen del producto
+        updateImage();
 
-        // Restar el movimiento acumulado correctamente para evitar desincronización
+        // Restamos el acumulado correctamente
         accumulatedMovement = accumulatedMovement % frameChangeThreshold;
       }
     }
