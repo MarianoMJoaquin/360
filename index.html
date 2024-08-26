@@ -35,7 +35,7 @@
 
   <!-- Botones para cambiar de color -->
   <div class="flex space-x-4">
-    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="red">Rojo 5</button>
+    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="red">Rojo 6</button>
     <button class="bg-blue-500 text-white px-4 py-2 rounded" data-color="blue">Azul</button>
     <button class="bg-green-500 text-white px-4 py-2 rounded" data-color="green">Verde</button>
   </div>
@@ -46,7 +46,7 @@
     let isDragging = false;
     let startX = 0;
     let accumulatedMovement = 0; // Movimiento acumulado para mayor precisión
-    const frameChangeThreshold = 90; // CAMBIO: Ajustamos el umbral para hacer el touch más suave
+    const frameChangeThreshold = 50; // CAMBIO: Ajustamos el umbral para hacer el touch más suave
     const productImage = document.getElementById('productImage');
     let currentColor = 'red'; 
     
