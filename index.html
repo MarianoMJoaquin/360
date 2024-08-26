@@ -30,19 +30,19 @@
   
   <!-- Visor del producto -->
   <div class="viewer bg-white shadow-lg rounded-md p-4 mb-4" id="productViewer">
-    <img src="images/red/1.png" alt="Producto en 360" id="productImage">
+    <img src="images/red/frame_1.jpg" alt="Producto en 360" id="productImage">
   </div>
 
   <!-- Botones para cambiar de color -->
   <div class="flex space-x-4">
-    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="red">Rojooooo</button>
+    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="red">Rojo</button>
     <button class="bg-blue-500 text-white px-4 py-2 rounded" data-color="blue">Azul</button>
     <button class="bg-green-500 text-white px-4 py-2 rounded" data-color="green">Verde</button>
   </div>
 
   <script>
     let currentFrame = 1;
-    const totalFrames = 30; 
+    const totalFrames = 36; 
     let isDragging = false;
     let startX = 0;
     let accumulatedMovement = 0; // Movimiento acumulado para mayor precisión
@@ -56,7 +56,7 @@
 
     const viewer = document.getElementById('productViewer');
 
-    // --- Controladores para el mouse ---
+    // --- Controladores para el mouse (computadoras) ---
     viewer.addEventListener('mousedown', (event) => {
       isDragging = true;
       startX = event.pageX;
@@ -81,16 +81,16 @@
       }
     });
 
-    // --- Función específica para manejar el arrastre con el mouse ---
+    // --- Función específica para manejar el arrastre con el mouse (computadoras) ---
     function handleMouseDrag(diff) {
-      accumulatedMovement += diff;
+      accumulatedMovement += diff; // Acumulamos el movimiento del mouse
 
-      // Manejamos el movimiento acumulado para ambos lados
+      // Si el movimiento acumulado supera el umbral, cambiamos los frames
       if (Math.abs(accumulatedMovement) > frameChangeThreshold) {
         const framesToMove = Math.floor(Math.abs(accumulatedMovement) / frameChangeThreshold);
 
-        // CAMBIO: Usamos diff para decidir hacia qué dirección moverse
-        currentFrame += (diff > 0) ? -framesToMove : framesToMove; 
+        // Usamos diff para decidir hacia qué dirección moverse (positivo: derecha, negativo: izquierda)
+        currentFrame += (diff > 0) ? -framesToMove : framesToMove;
 
         // CICLAR: Si el frame excede los límites, lo hacemos ciclar
         if (currentFrame > totalFrames) currentFrame = 1;
@@ -103,42 +103,43 @@
       }
     }
 
-    // --- Controladores para dispositivos táctiles ---
+    // --- Controladores para dispositivos táctiles (mejorados) ---
     viewer.addEventListener('touchstart', (event) => {
       if (event.touches.length === 1) { // Solo manejamos un toque
         isDragging = true;
-        startX = event.touches[0].pageX;
+        startX = event.touches[0].pageX; // Capturamos la posición inicial del primer toque
+        accumulatedMovement = 0; // Reiniciamos el acumulador de movimiento
       }
     });
 
     viewer.addEventListener('touchend', () => {
-      isDragging = false;
+      isDragging = false; // El usuario ha dejado de arrastrar, reseteamos el arrastre
     });
 
     viewer.addEventListener('touchmove', (event) => {
-      if (isDragging && event.touches.length === 1) {
-        const diff = event.touches[0].pageX - startX;
+      if (isDragging && event.touches.length === 1) { // Manejamos solo el primer dedo que toca la pantalla
+        const diff = event.touches[0].pageX - startX; // Calculamos la diferencia entre la posición inicial y la actual
         handleTouchDrag(diff);
-        startX = event.touches[0].pageX;
+        startX = event.touches[0].pageX; // Actualizamos la posición inicial al nuevo punto de arrastre
       }
     });
 
-    // --- Función específica para manejar el arrastre con touch ---
+    // --- Función específica para manejar el arrastre con touch mejorado ---
     function handleTouchDrag(diff) {
-      accumulatedMovement += diff;
+      accumulatedMovement += diff; // Acumulamos el movimiento del dedo
 
       // Manejamos el movimiento acumulado para touch
       if (Math.abs(accumulatedMovement) > frameChangeThreshold) {
-        const framesToMove = Math.floor(Math.abs(accumulatedMovement) / frameChangeThreshold);
+        const framesToMove = Math.floor(Math.abs(accumulatedMovement) / frameChangeThreshold); // Cuántos frames debemos mover
 
-        // CAMBIO: Usamos diff para decidir hacia qué dirección moverse
-        currentFrame += (diff > 0) ? -framesToMove : framesToMove; 
+        // Usamos diff para decidir hacia qué dirección moverse
+        currentFrame += (diff > 0) ? -framesToMove : framesToMove;
 
         // CICLAR: Si el frame excede los límites, lo hacemos ciclar
         if (currentFrame > totalFrames) currentFrame = 1;
         if (currentFrame < 1) currentFrame = totalFrames;
 
-        updateImage();
+        updateImage(); // Actualizamos la imagen del producto
 
         // Restar el movimiento acumulado correctamente para evitar desincronización
         accumulatedMovement = accumulatedMovement % frameChangeThreshold;
@@ -147,7 +148,7 @@
 
     // Función para actualizar la imagen
     function updateImage() {
-      productImage.src = `images/${currentColor}/${currentFrame}.png`;
+      productImage.src = `images/${currentColor}/frame_${currentFrame}.jpg`;
     }
 
     // Cambiar color
