@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tap Pagination</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="max-w-xl mx-auto mt-10" x-data="{ activeTab: 'automatico' }">
+    <!-- Tabs -->
+    <div class="border-b border-gray-200">
+      <ul class="flex space-x-4" role="tablist">
+        <li>
+          <button
+            @click="activeTab = 'automatico'"
+            :class="activeTab === 'automatico' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+            class="px-4 py-2 border-b-2 font-medium text-sm transition-colors duration-300 ease-in-out"
+          >
+            Automático
+          </button>
+        </li>
+        <li>
+          <button
+            @click="activeTab = 'manual'"
+            :class="activeTab === 'manual' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+            class="px-4 py-2 border-b-2 font-medium text-sm transition-colors duration-300 ease-in-out"
+          >
+            Manual
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Contenido -->
+    <div class="mt-4 transition-all duration-500 ease-in-out" x-show="activeTab === 'automatico'" x-transition>
+      <ul class="list-disc ml-5 space-y-2">
+        <li>Motor 1,5 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 107 CV de potencia máxima</li>
+        <li>Automático CVT de 7 velocidades</li>
+        <li>Incluye funciones selectas XS MT, más: Caja automática CVT de 7 velocidades</li>
+      </ul>
+    </div>
+
+    <div class="mt-4 transition-all duration-500 ease-in-out" x-show="activeTab === 'manual'" x-transition>
+      <ul class="list-disc ml-5 space-y-2">
+        <li>Motor 1,5 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 107 CV de potencia máxima</li>
+        <li>Manual de 6 velocidades</li>
+        <li>Espejos exteriores con regulación eléctrica y luz de de giro incorporada</li>
+        <li>Luces de circulación diurnas de LED (DRL)</li>
+        <li>Ópticas delanteras halógenas con regulación en altura</li>
+        <li>Llantas de acero de 15”</li>
+        <li>Levanta cristales eléctricos con función “One Touch” - conductor</li>
+        <li>Computadora de abordo</li>
+        <li>Volante con control de audio, display de información múltiple y teléfono</li>
+        <li>Audio con pantalla táctil LCD de 6.8” y USB (en consola central)</li>
+        <li>Conectividad: Apple Car Play® & Android Auto®</li>
+        <li>Control de estabilidad (VSC), control de tracción (TRC) y asistente de arranque en pendientes (HAC)</li>
+        <li>Faros antiniebla traseros</li>
+        <li>7 airbags: frontales (x2), de rodilla (conductor), laterales (x2) y de cortina (x2)</li>
+      </ul>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+</body>
+</html>

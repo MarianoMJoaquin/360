@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visor 360° Interactivo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Estilos básicos del visor y su contenedor */
+    .viewer-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f3f4f6;
+    }
+
+    .viewer {
+      width: 100%;
+      min-width: 600px; /* Ancho máximo del visor */
+      height: 316px; /* Alto del visor basado en la altura del sprite */
+      overflow: hidden;
+      cursor: grab;
+      background-image: url('corolla-images.png'); /* Ruta de la imagen del sprite */
+      background-size: 3000% 100%; /* Escalado para cubrir 30 fotogramas en el ancho */
+      background-position: 0 0; /* Posición inicial */
+      border: 2px solid #fff;      
+    }
+
+    /* Cambio del cursor cuando está en modo de arrastre */
+    .viewer:active {
+      cursor: grabbing;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
+  <div class="viewer-container" role="region" aria-label="Visor 360 grados">
+    <div class="viewer" id="viewer" role="img" aria-label="Imagen interactiva de 360 grados"></div>
+  </div>
+
+  <script>
+    const totalFrames = 30; // Número total de fotogramas en el sprite
+    let currentFrame = 0; // Fotograma inicial
+    let isDragging = false;
+    let startX = 0;
+    let lastX = 0;
+    const viewer = document.getElementById('viewer');
+
+    // Función para calcular el cambio de fotograma según el arrastre
+    function updateFrame(diffX) {
+      const frameWidth = viewer.clientWidth / totalFrames;
+      const framesToAdvance = Math.round(diffX / frameWidth);
+
+      // Calcula el nuevo fotograma y lo ajusta para que sea circular
+      currentFrame = (currentFrame + framesToAdvance + totalFrames) % totalFrames;
+
+      // Calcula la posición de fondo en porcentaje para el fotograma actual
+      const offsetX = (currentFrame * 100) / totalFrames;
+      viewer.style.backgroundPosition = `${offsetX}% 0`;
+    }
+
+    function handleMouseMove(event) {
+      if (isDragging) {
+        const diffX = event.pageX - lastX;
+        updateFrame(diffX);
+        lastX = event.pageX;
+      }
+    }
+
+    function handleTouchMove(event) {
+      if (isDragging) {
+        const diffX = event.touches[0].pageX - lastX;
+        updateFrame(diffX);
+        lastX = event.touches[0].pageX;
+      }
+    }
+
+    // --- Controladores para el mouse ---
+    viewer.addEventListener('mousedown', (event) => {
+      isDragging = true;
+      startX = event.pageX;
+      lastX = startX;
+      viewer.style.cursor = "grabbing";
+    });
+
+    viewer.addEventListener('mouseup', () => {
+      isDragging = false;
+      viewer.style.cursor = "grab";
+    });
+
+    viewer.addEventListener('mouseleave', () => {
+      isDragging = false;
+      viewer.style.cursor = "grab";
+    });
+
+    viewer.addEventListener('mousemove', handleMouseMove);
+
+    // --- Controladores para dispositivos táctiles ---
+    viewer.addEventListener('touchstart', (event) => {
+      isDragging = true;
+      startX = event.touches[0].pageX;
+      lastX = startX;
+    });
+
+    viewer.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
+    viewer.addEventListener('touchmove', handleTouchMove);
+
+    // --- Eventos adicionales para mejorar la fluidez ---
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+      viewer.style.cursor = "grab";
+    });
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    window.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
+    window.addEventListener('touchmove', handleTouchMove);
+  </script>
+</body>
+</html>

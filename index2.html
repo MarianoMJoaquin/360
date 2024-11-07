@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visor 360° con Precarga y Touch</title>
+  <title>Visor 360° con Tabs</title>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.3/cdn.min.js" integrity="sha512-D92iw2UwW1tbIIBjgtTRTzmdfTDP6gKds1ug8CjHkXJrBjjeyElDfsj2b8ZIgMbjFvF1bjbGIi9R5CCAzbu+yw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .viewer {
@@ -39,25 +41,110 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    
+    /* Estilos para las tabs */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      margin: 0 10px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: color 0.3s;
+    }
+
+    .tab:hover {
+      color: tomato;
+    }
+
+    .tab.active {
+      color: tomato;
+    }
   </style>
 </head>
 <body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
   
+  <!-- Tabs para seleccionar productos -->
+  <div class="tabs">
+    <div class="tab active" data-product="XS">XS</div>
+    <div class="tab" data-product="XLS">XLS</div>
+    <div class="tab" data-product="S">S</div>
+  </div>
+  
   <!-- Visor del producto con un spinner para mostrar mientras se cargan las imágenes -->
   <div class="viewer bg-white shadow-lg rounded-md p-4 mb-4" id="productViewer">
     <div id="spinner" class="spinner"></div>
-    <img src="images/white/1.png" alt="Producto en 360" id="productImage" style="display:none;">
+    <img src="images/XS/white/4.png" alt="Producto en 360" id="productImage" style="display:none;">
   </div>
 
   <!-- Botones para cambiar de color -->
   <div class="flex space-x-4">
-    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="white">Rojo</button>
-    <button class="bg-blue-500 text-white px-4 py-2 rounded" data-color="blue">Azul</button>
-    <button class="bg-green-500 text-white px-4 py-2 rounded" data-color="green">Verde</button>
+    <button class="bg-white text-black px-4 py-2 rounded" data-color="white">Blanco</button>
+    <!--<button class="bg-blue-500 text-white px-4 py-2 rounded" data-color="blue">Azul</button>-->
+    <button class="bg-red-500 text-white px-4 py-2 rounded" data-color="green">Rojo</button>
   </div>
 
+
+  <div class="max-w-xl mx-auto mt-10" x-data="{ activeTab: 'automatico' }">
+    <!-- Tabs -->
+    <div class="border-b border-gray-200">
+      <ul class="flex space-x-4" role="tablist">
+        <li>
+          <button
+            @click="activeTab = 'automatico'"
+            :class="activeTab === 'automatico' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+            class="px-4 py-2 border-b-2 font-medium text-sm transition-colors duration-300 ease-in-out"
+          >
+            Automático
+          </button>
+        </li>
+        <li>
+          <button
+            @click="activeTab = 'manual'"
+            :class="activeTab === 'manual' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+            class="px-4 py-2 border-b-2 font-medium text-sm transition-colors duration-300 ease-in-out"
+          >
+            Manual
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Contenido -->
+    <div class="mt-4 transition-all duration-500 ease-in-out" x-show="activeTab === 'automatico'" x-transition>
+      <ul class="list-disc ml-5 space-y-2">
+        <li>Motor 1,5 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 107 CV de potencia máxima</li>
+        <li>Automático CVT de 7 velocidades</li>
+        <li>Incluye funciones selectas XS MT, más: Caja automática CVT de 7 velocidades</li>
+      </ul>
+    </div>
+
+    <div class="mt-4 transition-all duration-500 ease-in-out" x-show="activeTab === 'manual'" x-transition>
+      <ul class="list-disc ml-5 space-y-2">
+        <li>Motor 1,5 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 107 CV de potencia máxima</li>
+        <li>Manual de 6 velocidades</li>
+        <li>Espejos exteriores con regulación eléctrica y luz de de giro incorporada</li>
+        <li>Luces de circulación diurnas de LED (DRL)</li>
+        <li>Ópticas delanteras halógenas con regulación en altura</li>
+        <li>Llantas de acero de 15”</li>
+        <li>Levanta cristales eléctricos con función “One Touch” - conductor</li>
+        <li>Computadora de abordo</li>
+        <li>Volante con control de audio, display de información múltiple y teléfono</li>
+        <li>Audio con pantalla táctil LCD de 6.8” y USB (en consola central)</li>
+        <li>Conectividad: Apple Car Play® & Android Auto®</li>
+        <li>Control de estabilidad (VSC), control de tracción (TRC) y asistente de arranque en pendientes (HAC)</li>
+        <li>Faros antiniebla traseros</li>
+        <li>7 airbags: frontales (x2), de rodilla (conductor), laterales (x2) y de cortina (x2)</li>
+      </ul>
+    </div>
+  </div>
+
+
   <script>
-    let currentFrame = 1;
+    let currentFrame = 4;
     const totalFrames = 30; 
     let isDragging = false;
     let startX = 0;
@@ -65,6 +152,7 @@
     const frameChangeThreshold = 20; // Ajustamos el umbral para hacer el touch más suave
     const productImage = document.getElementById('productImage');
     let currentColor = 'white'; 
+    let currentProduct = 'XS'; // Producto inicial
     let imagesLoaded = false;
 
     // Preload de todas las imágenes
@@ -72,8 +160,9 @@
     let imagesToLoad = [];
 
     function preloadImages() {
+      imagesToLoad = []; // Reiniciamos las imágenes a cargar
       for (let i = 1; i <= totalFrames; i++) {
-        const imgSrc = `images/${currentColor}/${i}.png`;
+        const imgSrc = `images/${currentProduct}/${currentColor}/${i}.png`;
         imagesToLoad.push(imgSrc);
       }
 
@@ -192,15 +281,33 @@
     }
 
     function updateImage() {
-      productImage.src = `images/${currentColor}/${currentFrame}.png`;
+      productImage.src = `images/${currentProduct}/${currentColor}/${currentFrame}.png`;
     }
+
+    // Cambiar de producto cuando se hace clic en una tab
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active')); // Remover la clase "active" de todas las tabs
+        tab.classList.add('active'); // Activar la tab seleccionada
+
+        currentProduct = tab.getAttribute('data-product'); // Cambiar al producto seleccionado // Reiniciar el color
+        currentColor = 'white'; // Reiniciar el frame
+        imagesLoaded = false; // Marcar las imágenes como no cargadas
+        document.getElementById('spinner').style.display = 'block'; // Mostrar el spinner
+        productImage.style.display = 'none'; // Ocultar la imagen actual
+        currentFrame = 4;
+        
+        preloadImages(); // Cargar las imágenes del nuevo producto
+        updateImage(); // Actualizar la imagen
+      });
+    });
 
     // Cambiar color y recargar imágenes
     const colorButtons = document.querySelectorAll('button[data-color]');
     colorButtons.forEach(button => {
       button.addEventListener('click', () => {
         currentColor = button.getAttribute('data-color');
-        currentFrame = 1; 
         preloadImages(); // Cargar las imágenes del nuevo color
         updateImage();
       });
