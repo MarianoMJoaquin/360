@@ -24,12 +24,14 @@
       background-image: url('corolla-images.png'); /* Ruta de la imagen del sprite */
       background-size: 3000% 100%; /* Escalado para cubrir 30 fotogramas en el ancho */
       background-position: 0 0; /* Posición inicial */
-      border: 2px solid #fff;      
+      transition: transform 0.2s ease-in-out;
+            
     }
 
     /* Cambio del cursor cuando está en modo de arrastre */
     .viewer:active {
       cursor: grabbing;
+      transform: scale(1.015);
     }
   </style>
 </head>
