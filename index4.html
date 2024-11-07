@@ -44,6 +44,7 @@
     let isDragging = false;
     let startX = 0;
     let lastX = 0;
+    let animationFrameId;
     const viewer = document.getElementById('viewer');
 
     // Función para calcular el cambio de fotograma según el arrastre
@@ -59,18 +60,23 @@
       viewer.style.backgroundPosition = `${offsetX}% 0`;
     }
 
+    function animate() {
+      if (isDragging) {
+        const diffX = lastX - startX;
+        updateFrame(diffX);
+        startX = lastX;
+      }
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
     function handleMouseMove(event) {
       if (isDragging) {
-        const diffX = event.pageX - lastX;
-        updateFrame(diffX);
         lastX = event.pageX;
       }
     }
 
     function handleTouchMove(event) {
       if (isDragging) {
-        const diffX = event.touches[0].pageX - lastX;
-        updateFrame(diffX);
         lastX = event.touches[0].pageX;
       }
     }
@@ -81,16 +87,19 @@
       startX = event.pageX;
       lastX = startX;
       viewer.style.cursor = "grabbing";
+      animationFrameId = requestAnimationFrame(animate);
     });
 
     viewer.addEventListener('mouseup', () => {
       isDragging = false;
       viewer.style.cursor = "grab";
+      cancelAnimationFrame(animationFrameId);
     });
 
     viewer.addEventListener('mouseleave', () => {
       isDragging = false;
       viewer.style.cursor = "grab";
+      cancelAnimationFrame(animationFrameId);
     });
 
     viewer.addEventListener('mousemove', handleMouseMove);
@@ -100,10 +109,12 @@
       isDragging = true;
       startX = event.touches[0].pageX;
       lastX = startX;
+      animationFrameId = requestAnimationFrame(animate);
     });
 
     viewer.addEventListener('touchend', () => {
       isDragging = false;
+      cancelAnimationFrame(animationFrameId);
     });
 
     viewer.addEventListener('touchmove', handleTouchMove);
@@ -112,12 +123,14 @@
     window.addEventListener('mouseup', () => {
       isDragging = false;
       viewer.style.cursor = "grab";
+      cancelAnimationFrame(animationFrameId);
     });
 
     window.addEventListener('mousemove', handleMouseMove);
 
     window.addEventListener('touchend', () => {
       isDragging = false;
+      cancelAnimationFrame(animationFrameId);
     });
 
     window.addEventListener('touchmove', handleTouchMove);
