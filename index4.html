@@ -3,36 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visor 360° con Selector de Color</title>
+  <title>Visor 360° con Selector de Color y Versión</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
   
   <div class="flex flex-col items-center space-y-4">
+    
+    <!-- Tabs de versión -->
+    <div class="flex space-x-4 mb-4">
+      <button class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition-colors version-tab" data-version="xli">XLI</button>
+      <button class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition-colors version-tab" data-version="xei">XEI</button>
+      <button class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition-colors version-tab" data-version="seg">SEG</button>
+    </div>
+
     <!-- Visor 360° -->
-    <div class="w-[600px] h-[316px] overflow-hidden cursor-grab bg-cover bg-no-repeat bg-[url('corolla-red.png')] transition-transform ease-out duration-100 active:scale-105" id="viewer"></div>
+    <div class="w-[600px] h-[316px] overflow-hidden cursor-grab bg-cover bg-no-repeat bg-[url('/corolla/corolla-xli-red.png')] transition-transform ease-out duration-100 active:scale-105" id="viewer"></div>
     
     <!-- Selectores de Color -->
     <div class="flex space-x-4">
       <button class="w-10 h-10 rounded-full border-2 border-gray-300 bg-red-500 hover:scale-110 transition-transform duration-200 color-button" data-color="red"></button>
       <button class="w-10 h-10 rounded-full border-2 border-gray-300 bg-blue-500 hover:scale-110 transition-transform duration-200 color-button" data-color="blue"></button>
-      <button class="w-10 h-10 rounded-full border-2 border-gray-300 bg-white hover:scale-110 transition-transform duration-200 color-button" data-color="white"></button>
+      <button class="w-10 h-10 rounded-full border-2 border-gray-300 bg-white hover:scale-110 transition-transform duration-200 color-button" data-color="white-perl"></button>
     </div>
   </div>
 
   <script>
-    const totalFrames = 30; // Número total de fotogramas
-    let currentFrame = 0; // Fotograma actual
-    let isDragging = false; // Indica si se está arrastrando el ratón o el dedo táctil para rotar el visor 360° 
-    let startX = 0; // Posición inicial del arrastre en el eje X en píxeles 
-    const frameWidthPercentage = 100 / totalFrames; // Ancho de cada fotograma en porcentaje 
-    const viewer = document.getElementById('viewer'); // Elemento contenedor del visor 360° 
+    const totalFrames = 30;
+    let currentFrame = 0;
+    let isDragging = false;
+    let startX = 0;
+    let currentColor = 'red'; // Color inicial
+    let currentVersion = 'xli'; // Versión inicial
+    const frameWidthPercentage = 100 / totalFrames;
+    const viewer = document.getElementById('viewer');
 
-    // Función para cambiar el sprite según el color seleccionado
+    // Función para actualizar el sprite según el color y la versión seleccionada
+    function updateSprite() {
+      viewer.style.backgroundImage = `url('/corolla/corolla-${currentVersion}-${currentColor}.png')`;
+      currentFrame = 0; // Reinicia al primer fotograma al cambiar de versión o color
+      viewer.style.backgroundPosition = `0 0`;
+    }
+
+    // Cambio de color
     function changeColor(color) {
-      viewer.style.backgroundImage = `url('corolla-${color}.png')`;
-      currentFrame = 0; // Reinicia al primer fotograma al cambiar de color
-      viewer.style.backgroundPosition = `0 0`; // Asegura que comience desde el inicio
+      currentColor = color;
+      updateSprite();
+    }
+
+    // Cambio de versión
+    function changeVersion(version) {
+      currentVersion = version;
+      updateSprite();
     }
 
     // Actualizar el fotograma mostrado en función del movimiento del arrastre
@@ -96,7 +118,7 @@
       }
     });
 
-    // Selector de color
+    // Eventos de cambio de color
     document.querySelectorAll('.color-button').forEach(button => {
       button.addEventListener('click', () => {
         const color = button.getAttribute('data-color');
@@ -104,10 +126,18 @@
       });
     });
 
-    // Carga diferida del sprite solo cuando esté visible
+    // Eventos de cambio de versión
+    document.querySelectorAll('.version-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const version = tab.getAttribute('data-version');
+        changeVersion(version);
+      });
+    });
+
+    // Carga diferida del sprite inicial solo cuando esté visible
     const spriteObserver = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
-        viewer.style.backgroundImage = "url('corolla-red.png')"; // Carga inicial
+        viewer.style.backgroundImage = "url('/corolla/corolla-xli-red.png')"; // Carga inicial
         spriteObserver.disconnect();
       }
     }, { threshold: 0.1 });
