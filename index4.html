@@ -21,6 +21,12 @@
 
       <!-- Visor 360° -->
       <div style="background-size: 3000%;" class="viewer-container w-full md:bg-[length:3000%] h-[200px] md:h-[316px] overflow-hidden cursor-grab  bg-cover bg-no-repeat bg-[url('corolla-xli-red.png')]" id="viewer"></div>
+
+      <div class="flex justify-center space-x-4 font-semibold italic">
+        <p><</p>
+        <p>Arrastra para girar</p>
+        <p>></p>
+      </div>
       
       <!-- Selectores de Color -->
       <div class="flex justify-center space-x-2 md:space-x-4">
@@ -33,7 +39,7 @@
     <!-- Columna Derecha: Tabs de Subversión y Descripción -->
     <div class="flex flex-col space-y-4 w-full md:w-1/3">
       <div class="flex justify-center space-x-2">
-        <button class="px-4 py-2 rounded-md font-semibold transition-colors duration-200 subversion-tab bg-gray-300 hover:bg-gray-400 text-gray-700 hidden" data-subversion="mt">MT</button>
+        <button class="inline-block p-4 border-b-2 rounded-t-lg text-black transition-colors duration-200 subversion-tab hover:text-red-600 hover:border-red-300 hidden" data-subversion="mt">MT</button>
         <button class="px-4 py-2 rounded-md font-semibold transition-colors duration-200 subversion-tab bg-gray-300 hover:bg-gray-400 text-gray-700 hidden" data-subversion="at">AT</button>
         <button class="px-4 py-2 rounded-md font-semibold transition-colors duration-200 subversion-tab bg-gray-300 hover:bg-gray-400 text-gray-700 hidden" data-subversion="gr">GR</button>
       </div>
