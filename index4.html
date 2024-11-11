@@ -3,32 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visor 360° con Selector de Color y Versión</title>
+  <title>Visor 360° Responsivo</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
   
-  <div class="flex flex-col items-center space-y-4">
-    
-    <!-- Tabs de versión -->
-    <div class="flex space-x-4 mb-4">
-      <button class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition-colors version-tab" data-version="xli">XLI</button>
-      <button class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition-colors version-tab" data-version="xei">XEI</button>
-      <button class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition-colors version-tab" data-version="seg">SEG</button>
+  <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 w-full max-w-4xl">
+    <!-- Columna Izquierda: Visor 360° y Selectores de Color -->
+    <div class="flex flex-col items-center space-y-4 w-full md:w-2/3">
+      
+      <!-- Tabs de versión -->
+      <div class="flex justify-center md:justify-start space-x-2 md:space-x-4 mb-4">
+        <button class="px-4 py-2 rounded-md font-semibold transition-colors duration-200 version-tab bg-gray-300 hover:bg-gray-400 text-gray-700 active-tab" data-version="xli">XLI</button>
+        <button class="px-4 py-2 rounded-md font-semibold transition-colors duration-200 version-tab bg-gray-300 hover:bg-gray-400 text-gray-700" data-version="xei">XEI</button>
+        <button class="px-4 py-2 rounded-md font-semibold transition-colors duration-200 version-tab bg-gray-300 hover:bg-gray-400 text-gray-700" data-version="seg">SEG</button>
+      </div>
+
+      <!-- Visor 360° -->
+      <div style="background-size: 3000%;" class="viewer-container w-full md:bg-[length:3000%] h-[200px] md:h-[316px] overflow-hidden cursor-grab  bg-cover bg-no-repeat bg-[url('corolla-xli-red.png')]" id="viewer"></div>
+      
+      <!-- Selectores de Color -->
+      <div class="flex justify-center space-x-2 md:space-x-4">
+        <button class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gray-300 bg-red-500 hover:scale-110 transition-transform duration-200 color-button" data-color="red"></button>
+        <button class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gray-300 bg-blue-500 hover:scale-110 transition-transform duration-200 color-button" data-color="blue"></button>
+        <button class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gray-300 bg-white hover:scale-110 transition-transform duration-200 color-button" data-color="white"></button>
+      </div>
     </div>
 
-    <!-- Visor 360° -->
-    <div class="w-[600px] h-[316px] overflow-hidden cursor-grab bg-cover bg-no-repeat bg-[url('/corolla/corolla-xli-red.png')] transition-transform ease-out duration-100 active:scale-105" id="viewer"></div>
-    <div class="flex space-x-4">
-      <p><</p>
-      <p>Arrastre para girar</p>
-      <p>></p>
-    </div>
-    <!-- Selectores de Color -->
-    <div class="flex space-x-4">
-      <button class="w-10 h-10 rounded-full border-2 border-gray-300 bg-red-500 hover:scale-110 transition-transform duration-200 color-button" data-color="red"></button>
-      <button class="w-10 h-10 rounded-full border-2 border-gray-300 bg-blue-500 hover:scale-110 transition-transform duration-200 color-button" data-color="blue"></button>
-      <button class="w-10 h-10 rounded-full border-2 border-gray-300 bg-white hover:scale-110 transition-transform duration-200 color-button" data-color="white-perl"></button>
+    <!-- Columna Derecha: Tabs de Subversión y Descripción -->
+    <div class="flex flex-col space-y-4 w-full md:w-1/3">
+      <div class="flex justify-center space-x-2">
+        <button class="px-4 py-2 rounded-md font-semibold transition-colors duration-200 subversion-tab bg-gray-300 hover:bg-gray-400 text-gray-700 hidden" data-subversion="mt">MT</button>
+        <button class="px-4 py-2 rounded-md font-semibold transition-colors duration-200 subversion-tab bg-gray-300 hover:bg-gray-400 text-gray-700 hidden" data-subversion="at">AT</button>
+        <button class="px-4 py-2 rounded-md font-semibold transition-colors duration-200 subversion-tab bg-gray-300 hover:bg-gray-400 text-gray-700 hidden" data-subversion="gr">GR</button>
+      </div>
+      
+      <!-- Descripción de Subversión -->
+      <div class="bg-white p-4 rounded-lg shadow-md">
+        <h2 class="text-lg md:text-xl font-semibold mb-2">Descripción de la Subversión</h2>
+        <ul class="list-disc pl-5 text-sm md:text-base" id="descriptionList">
+          <!-- Descripciones dinámicas se insertarán aquí -->
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -39,13 +55,22 @@
     let startX = 0;
     let currentColor = 'red'; // Color inicial
     let currentVersion = 'xli'; // Versión inicial
+    let currentSubversion = 'mt'; // Subversión inicial
     const frameWidthPercentage = 100 / totalFrames;
     const viewer = document.getElementById('viewer');
 
-    // Función para actualizar el sprite según el color y la versión seleccionada
+    // Datos de las descripciones de subversiones
+    const subversionDescriptions = {
+      mt: ["Transmisión manual", "5 velocidades", "Tracción delantera"],
+      at: ["Transmisión automática", "6 velocidades", "Tracción delantera"],
+      gr: ["Transmisión GR", "6 velocidades deportivas", "Tracción trasera", "Edición deportiva"]
+    };
+
+    // Función para actualizar el sprite según la versión, subversión y color seleccionados
     function updateSprite() {
-      viewer.style.backgroundImage = `url('/corolla/corolla-${currentVersion}-${currentColor}.png')`;
-      currentFrame = 0; // Reinicia al primer fotograma al cambiar de versión o color
+      viewer.style.backgroundImage = `url('corolla/corolla-${currentVersion}-${currentColor}.png')`;
+      viewer.style.backgroundSize = "3000%"; // Ajuste para mantener proporción correcta
+      currentFrame = 0; // Reinicia al primer fotograma
       viewer.style.backgroundPosition = `0 0`;
     }
 
@@ -59,9 +84,61 @@
     function changeVersion(version) {
       currentVersion = version;
       updateSprite();
+      updateSubversionTabs(version);
+
+      // Actualizar el estilo del tab activo
+      document.querySelectorAll('.version-tab').forEach(tab => {
+        tab.classList.remove('active-tab', 'bg-gray-700', 'text-white');
+        tab.classList.add('bg-gray-300', 'text-gray-700');
+      });
+      document.querySelector(`[data-version="${version}"]`).classList.add('active-tab', 'bg-gray-700', 'text-white');
     }
 
-    // Actualizar el fotograma mostrado en función del movimiento del arrastre
+    // Cambio de subversión
+    function changeSubversion(subversion) {
+      currentSubversion = subversion;
+      //updateSprite();
+      updateDescription(subversion);
+
+      // Actualizar el estilo del tab activo
+      document.querySelectorAll('.subversion-tab').forEach(tab => {
+        tab.classList.remove('active-tab', 'bg-gray-700', 'text-white');
+        tab.classList.add('bg-gray-300', 'text-gray-700');
+      });
+      document.querySelector(`[data-subversion="${subversion}"]`).classList.add('active-tab', 'bg-gray-700', 'text-white');
+    }
+
+    // Mostrar tabs de subversión según la versión seleccionada
+    function updateSubversionTabs(version) {
+      const allSubversionTabs = document.querySelectorAll('.subversion-tab');
+      allSubversionTabs.forEach(tab => tab.classList.add('hidden')); // Ocultar todos los tabs de subversión
+
+      if (version === 'xli') {
+        document.querySelector('[data-subversion="mt"]').classList.remove('hidden');
+        document.querySelector('[data-subversion="at"]').classList.remove('hidden');
+        document.querySelector('[data-subversion="gr"]').classList.remove('hidden');
+      } else if (version === 'xei') {
+        document.querySelector('[data-subversion="mt"]').classList.remove('hidden');
+        document.querySelector('[data-subversion="at"]').classList.remove('hidden');
+      } else if (version === 'seg') {
+        document.querySelector('[data-subversion="gr"]').classList.remove('hidden');
+      }
+    }
+
+    // Actualizar la descripción de la subversión
+    function updateDescription(subversion) {
+      const descriptionList = document.getElementById('descriptionList');
+      descriptionList.innerHTML = ""; // Limpiar lista
+
+      // Añadir elementos de la descripción
+      subversionDescriptions[subversion].forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.textContent = item;
+        descriptionList.appendChild(listItem);
+      });
+    }
+
+    // Mantener la función updateFrame original para que el desplazamiento funcione adecuadamente
     function updateFrame(diffX) {
       if (diffX > 20) {
         currentFrame = (currentFrame + 1) % totalFrames;
@@ -104,7 +181,7 @@
       }
     });
 
-    // --- Soporte para dispositivos táctiles ---
+    // Soporte para dispositivos táctiles
     viewer.addEventListener('touchstart', (event) => {
       isDragging = true;
       startX = event.touches[0].pageX;
@@ -138,14 +215,17 @@
       });
     });
 
-    // Carga diferida del sprite inicial solo cuando esté visible
-    const spriteObserver = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) {
-        viewer.style.backgroundImage = "url('/corolla/corolla-xli-red.png')"; // Carga inicial
-        spriteObserver.disconnect();
-      }
-    }, { threshold: 0.1 });
-    spriteObserver.observe(viewer);
+    // Eventos de cambio de subversión
+    document.querySelectorAll('.subversion-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const subversion = tab.getAttribute('data-subversion');
+        changeSubversion(subversion);
+      });
+    });
+
+    // Inicialización
+    updateSubversionTabs(currentVersion); // Configura las subversiones iniciales para XLI
+    updateDescription(currentSubversion); // Muestra la descripción inicial
   </script>
 
 </body>
