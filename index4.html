@@ -3,144 +3,274 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visor 360° Responsivo</title>
+  <title>Visor 360° - Corolla</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
-  
   <div class="flex bg-white p-5 rounded-lg flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 w-full max-w-4xl">
-    <!-- Columna Izquierda: Visor 360° y Selectores de Color -->
+    <!-- Columna Izquierda -->
     <div class="flex flex-col items-center space-y-4 w-full md:w-2/3">
-      
+      <!-- Selector de modelo -->
+      <select id="modelSelector" class="mb-4 p-2 rounded-md border border-gray-300">
+        <option value="corolla">Corolla</option>
+        <option value="yaris">Yaris</option>
+        <option value="hilux_cabina_doble">Hilux Cabina Doble</option>
+      </select>
+
       <!-- Tabs de versión -->
-      <div class="flex justify-center md:justify-start space-x-2 md:space-x-4 mb-4">
-        <button class="px-4 py-2 rounded-md font-semibold transition-colors duration-200 version-tab bg-gray-300 hover:bg-gray-400 text-gray-700 active-tab" data-version="xli">XLI</button>
-        <button class="px-4 py-2 rounded-md font-semibold transition-colors duration-200 version-tab bg-gray-300 hover:bg-gray-400 text-gray-700" data-version="xei">XEI</button>
-        <button class="px-4 py-2 rounded-md font-semibold transition-colors duration-200 version-tab bg-gray-300 hover:bg-gray-400 text-gray-700" data-version="seg">SEG</button>
-      </div>
+      <div id="versionTabs" class="flex justify-center md:justify-start space-x-2 md:space-x-4 mb-4"></div>
 
       <!-- Visor 360° -->
-      <div style="background-size: 3000%;" class="viewer-container w-full md:bg-[length:3000%] h-[200px] md:h-[316px] overflow-hidden cursor-grab  bg-cover bg-no-repeat bg-[url('corolla-xli-red.png')]" id="viewer"></div>
+      <div id="viewer" class="viewer-container w-full h-[200px] md:h-[316px] overflow-hidden cursor-grab bg-cover bg-no-repeat"></div>
 
       <div class="flex justify-center space-x-4 font-semibold italic">
-        <p><</p>
         <p>Arrastra para girar</p>
-        <p>></p>
       </div>
-      
+
       <!-- Selectores de Color -->
-      <div class="flex justify-center space-x-2 md:space-x-4">
-        <button class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gray-300 bg-red-500 hover:scale-110 transition-transform duration-200 color-button" data-color="red"></button>
-        <button class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gray-300 bg-blue-500 hover:scale-110 transition-transform duration-200 color-button" data-color="blue"></button>
-        <button class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gray-300 bg-white hover:scale-110 transition-transform duration-200 color-button" data-color="white"></button>
-      </div>
+      <div id="colorButtons" class="flex justify-center space-x-2 md:space-x-4"></div>
     </div>
 
-    <!-- Columna Derecha: Tabs de Subversión y Descripción -->
+    <!-- Columna Derecha -->
     <div class="flex flex-col space-y-4 w-full md:w-1/3">
-      <div class="flex justify-center space-x-2">
-        <button class="inline-block p-4 border-b-2 rounded-t-lg text-black transition-colors duration-200 subversion-tab hover:text-red-600 hover:border-red-300 hidden" data-subversion="mt">MT</button>
-        <button class="px-4 py-2 rounded-md font-semibold transition-colors duration-200 subversion-tab bg-gray-300 hover:bg-gray-400 text-gray-700 hidden" data-subversion="at">AT</button>
-        <button class="px-4 py-2 rounded-md font-semibold transition-colors duration-200 subversion-tab bg-gray-300 hover:bg-gray-400 text-gray-700 hidden" data-subversion="gr">GR</button>
-      </div>
-      
-      <!-- Descripción de Subversión -->
+      <div id="subversionTabs" class="flex justify-center space-x-2"></div>
       <div class="bg-white p-4 rounded-lg shadow-md">
-        <h2 class="text-lg md:text-xl font-semibold mb-2">Descripción de la Subversión</h2>
-        <ul class="list-disc pl-5 text-sm md:text-base" id="descriptionList">
-          <!-- Descripciones dinámicas se insertarán aquí -->
-        </ul>
+        <h2 class="text-lg md:text-xl font-semibold mb-2">Descripción</h2>
+        <ul id="descriptionList" class="list-disc pl-5 text-sm md:text-base"></ul>
       </div>
     </div>
   </div>
 
   <script>
     const totalFrames = 30;
+    const frameWidthPercentage = 100 / totalFrames;
+
+    const subversionDescriptions = {
+      corolla: {
+        mt: ["Transmisión manual", "5 velocidades", "Tracción delantera"],
+        at: ["Transmisión automática", "6 velocidades", "Tracción delantera"],
+        gr: ["Transmisión GR", "6 velocidades deportivas", "Tracción trasera"]
+      },
+      yaris: {
+        mt: ["Transmisión manual", "5 velocidades", "Tracción delantera"],
+        cvt: ["Transmisión CVT", "7 velocidades", "Tracción delantera"]
+      },
+      hilux: {
+        mt: ["Transmisión manual", "6 velocidades", "Tracción 4x4"],
+        at: ["Transmisión automática", "6 velocidades", "Tracción 4x4"]
+      }
+    };
+
+    const colors = {
+      corolla: {
+        xli: [
+          { name: "Rojo Metalizado", code: "red", hex: "#AC1625" },
+          { name: "Negro Mica", code: "black", hex: "#292826" }
+        ],
+        xei: [
+          { name: "Super Blanco", code: "white", hex: "#F8F8F8" },
+          { name: "Gris Azulado", code: "blue", hex: "#61727B"}
+        ],
+        seg: [
+          { name: "Blanco Perlado", code: "white-perl", hex: "#DBDAD6"},
+          { name: "Gris Plata", code: "silver", hex: "#DCDCDE"}
+        ]
+      },
+      yaris: {
+        xs: [
+          { name: "Rojo", code: "red", hex: "#FF0000" },
+          { name: "Negro", code: "black", hex: "#000000" }
+        ],
+        xls: [
+          { name: "Blanco", code: "white", hex: "#FFFFFF" },
+          { name: "Azul", code: "blue", hex: "#0000FF"}
+        ],
+        s: [
+          { name: "Blanco", code: "white", hex: "#FFFFFF" },
+          { name: "Azul", code: "blue", hex: "#0000FF"}
+        ]
+      },
+      hilux_cabina_doble: {
+        dx: [
+          { name: "Rojo", code: "red", hex: "#B22222" },
+          { name: "Negro", code: "black", hex: "#111111" }
+        ],
+        sr: [
+          { name: "Blanco", code: "white", hex: "#F5F5F5" },
+          { name: "Gris", code: "gray", hex: "#808080"}
+        ],
+        srv: [
+          { name: "Rojo", code: "red", hex: "#B22222" },
+          { name: "Negro", code: "black", hex: "#111111" }
+        ],
+        srx: [
+          { name: "Blanco", code: "white", hex: "#F5F5F5" },
+          { name: "Gris", code: "gray", hex: "#808080"}
+        ]
+      }
+    };
+
+    const versions = {
+      corolla: [
+        { name: "XLI", slug: "xli", subversions: ["2.0 XLI CVT"] },
+        { name: "XEI", slug: "xei", subversions: ["2.0 XEI CVT"] },
+        { name: "SEG", slug: "seg", subversions: ["2.0 SEG CVT"] }
+      ],
+      corolla_hybrid: [
+        { name: "XEI", slug: "xei", subversions: ["HEV 1.8 XEI eCVT"] },
+        { name: "SEG", slug: "seg", subversions: ["HEV 1.8 SEG eCVT"] }
+      ],
+      corolla_gr_sport: [
+        { name: "GR-Sport", slug: "gr-sport", subversions: ["2.0 CVT"] }
+      ],
+      yaris_hatchback: [
+        { name: "XS", slug: "xs", subversions: ["XS 1.5 6M/T 5P", "XS 1.5 CVT 5P"] },
+        { name: "XLS", slug: "xls", subversions: ["XLS 1.5 6M/T 5P", "XLS 1.5 CVT 5P", "XLS+ 1.5 CVT 5P", "XLS PACK 1.5 CVT 5P"] },
+        { name: "S", slug: "s", subversions: ["S 1.5 CVT 5P"] },
+      ],
+      yaris_sedan: [
+        { name: "XLS", slug: "xls", subversions: ["XLS 1.5 6M/T 4P", "XLS 1.5 CVT 4P", "XLS PACK 1.5 CVT 4P"] }
+      ],
+      hilux_cabina_doble: [
+        { name: "DX", slug: "dx", subversions: ["mt"] },
+        { name: "SR", slug: "sr", subversions: ["mt", "at"] },
+        { name: "SRV", slug: "srv", subversions:["mt", "at"] },
+        { name: "SRX", slug: "srx", subversions:["mt", "at"] }
+      ]
+    };
+
+    let currentModel = "corolla";
+    let currentVersion = "xli";
+    let currentColor = "red";
+    let currentSubversion = "mt";
     let currentFrame = 0;
     let isDragging = false;
     let startX = 0;
-    let currentColor = 'red'; // Color inicial
-    let currentVersion = 'xli'; // Versión inicial
-    let currentSubversion = 'mt'; // Subversión inicial
-    const frameWidthPercentage = 100 / totalFrames;
-    const viewer = document.getElementById('viewer');
 
-    // Datos de las descripciones de subversiones
-    const subversionDescriptions = {
-      mt: ["Transmisión manual", "5 velocidades", "Tracción delantera"],
-      at: ["Transmisión automática", "6 velocidades", "Tracción delantera"],
-      gr: ["Transmisión GR", "6 velocidades deportivas", "Tracción trasera", "Edición deportiva"]
-    };
+    const modelSelector = document.getElementById("modelSelector");
+    const versionTabs = document.getElementById("versionTabs");
+    const colorButtons = document.getElementById("colorButtons");
+    const subversionTabs = document.getElementById("subversionTabs");
+    const descriptionList = document.getElementById("descriptionList");
+    const viewer = document.getElementById("viewer");
 
-    // Función para actualizar el sprite según la versión, subversión y color seleccionados
+    modelSelector.addEventListener("change", (event) => {
+      currentModel = event.target.value;
+      currentVersion = versions[currentModel][0].slug;
+      currentSubversion = versions[currentModel][0].subversions[0];
+      currentColor = colors[currentModel][currentVersion][0].code;
+      initialize();
+    });
+
+    function initialize() {
+      renderVersionTabs();
+      renderColorButtons();
+      renderSubversionTabs();
+      updateSprite();
+      updateDescription();
+    }
+
+    // Renderizar tabs de versiones
+    function renderVersionTabs() {
+      versionTabs.innerHTML = "";
+      versions[currentModel].forEach((version) => {
+        const button = document.createElement("button");
+        button.textContent = version.name;
+        button.className = `version-tab px-4 py-2 rounded-md font-semibold transition-colors duration-200 ${
+          currentVersion === version.slug ? "bg-gray-700 text-white" : "bg-gray-300 hover:bg-gray-400 text-gray-700"
+        }`;
+        button.addEventListener("click", () => {
+          currentVersion = version.slug;
+          currentSubversion = version.subversions[0];
+          currentColor = colors[currentModel][currentVersion][0].code;
+          updateActiveVersionButton();
+          renderSubversionTabs();
+          renderColorButtons();
+          updateSprite();
+          updateDescription();
+        });
+        button.dataset.version = version.slug;
+        versionTabs.appendChild(button);
+      });
+    }
+
+    // Actualizar estado activo de versiones
+    function updateActiveVersionButton() {
+      document.querySelectorAll(".version-tab").forEach((button) => {
+        if (button.dataset.version === currentVersion) {
+          button.classList.add("bg-gray-700", "text-white");
+          button.classList.remove("bg-gray-300", "hover:bg-gray-400", "text-gray-700");
+        } else {
+          button.classList.add("bg-gray-300", "hover:bg-gray-400", "text-gray-700");
+          button.classList.remove("bg-gray-700", "text-white");
+        }
+      });
+    }
+
+    // Renderizar tabs de subversiones
+    function renderSubversionTabs() {
+      const version = versions[currentModel].find((v) => v.slug === currentVersion);
+      if (!version) return;
+
+      subversionTabs.innerHTML = "";
+      version.subversions.forEach((subversion) => {
+        const tab = document.createElement("button");
+        tab.textContent = subversion.toUpperCase();
+        tab.className = `subversion-tab px-4 py-2 rounded-md font-semibold transition-colors duration-200 ${
+          currentSubversion === subversion ? "bg-gray-700 text-white" : "bg-gray-300 hover:bg-gray-400 text-gray-700"
+        }`;
+        tab.dataset.subversion = subversion;
+        tab.addEventListener("click", () => {
+          currentSubversion = subversion;
+          updateActiveSubversionButton();
+          updateDescription();
+        });
+        subversionTabs.appendChild(tab);
+      });
+    }
+
+    // Actualizar estado activo de subversiones
+    function updateActiveSubversionButton() {
+      document.querySelectorAll(".subversion-tab").forEach((tab) => {
+        if (tab.dataset.subversion === currentSubversion) {
+          tab.classList.add("bg-gray-700", "text-white");
+          tab.classList.remove("bg-gray-300", "hover:bg-gray-400", "text-gray-700");
+        } else {
+          tab.classList.add("bg-gray-300", "hover:bg-gray-400", "text-gray-700");
+          tab.classList.remove("bg-gray-700", "text-white");
+        }
+      });
+    }
+
+    // Renderizar botones de colores
+    function renderColorButtons() {
+      colorButtons.innerHTML = "";
+      colors[currentModel][currentVersion].forEach((color) => {
+        const button = document.createElement("button");
+        button.className = `w-8 h-8 rounded-full border-2 border-gray-300 hover:scale-110 transition-transform duration-200`;
+        button.style.backgroundColor = color.hex;
+        button.addEventListener("click", () => {
+          currentColor = color.code;
+          updateSprite();
+        });
+        colorButtons.appendChild(button);
+      });
+    }
+
+    // Actualizar sprite del visor
     function updateSprite() {
-      viewer.style.backgroundImage = `url('corolla/corolla-${currentVersion}-${currentColor}.png')`;
-      viewer.style.backgroundSize = "3000%"; // Ajuste para mantener proporción correcta
-      currentFrame = 0; // Reinicia al primer fotograma
+      viewer.style.backgroundImage = `url('${currentModel}/${currentModel}-${currentVersion}-${currentColor}.png')`;
+      viewer.style.backgroundSize = "3000%";
       viewer.style.backgroundPosition = `0 0`;
     }
 
-    // Cambio de color
-    function changeColor(color) {
-      currentColor = color;
-      updateSprite();
-    }
-
-    // Cambio de versión
-    function changeVersion(version) {
-      currentVersion = version;
-      updateSprite();
-      updateSubversionTabs(version);
-
-      // Actualizar el estilo del tab activo
-      document.querySelectorAll('.version-tab').forEach(tab => {
-        tab.classList.remove('active-tab', 'bg-gray-700', 'text-white');
-        tab.classList.add('bg-gray-300', 'text-gray-700');
-      });
-      document.querySelector(`[data-version="${version}"]`).classList.add('active-tab', 'bg-gray-700', 'text-white');
-    }
-
-    // Cambio de subversión
-    function changeSubversion(subversion) {
-      currentSubversion = subversion;
-      //updateSprite();
-      updateDescription(subversion);
-
-      // Actualizar el estilo del tab activo
-      document.querySelectorAll('.subversion-tab').forEach(tab => {
-        tab.classList.remove('active-tab', 'bg-gray-700', 'text-white');
-        tab.classList.add('bg-gray-300', 'text-gray-700');
-      });
-      document.querySelector(`[data-subversion="${subversion}"]`).classList.add('active-tab', 'bg-gray-700', 'text-white');
-    }
-
-    // Mostrar tabs de subversión según la versión seleccionada
-    function updateSubversionTabs(version) {
-      const allSubversionTabs = document.querySelectorAll('.subversion-tab');
-      allSubversionTabs.forEach(tab => tab.classList.add('hidden')); // Ocultar todos los tabs de subversión
-
-      if (version === 'xli') {
-        document.querySelector('[data-subversion="mt"]').classList.remove('hidden');
-        document.querySelector('[data-subversion="at"]').classList.remove('hidden');
-        document.querySelector('[data-subversion="gr"]').classList.remove('hidden');
-      } else if (version === 'xei') {
-        document.querySelector('[data-subversion="mt"]').classList.remove('hidden');
-        document.querySelector('[data-subversion="at"]').classList.remove('hidden');
-      } else if (version === 'seg') {
-        document.querySelector('[data-subversion="gr"]').classList.remove('hidden');
-      }
-    }
-
-    // Actualizar la descripción de la subversión
-    function updateDescription(subversion) {
-      const descriptionList = document.getElementById('descriptionList');
-      descriptionList.innerHTML = ""; // Limpiar lista
-
-      // Añadir elementos de la descripción
-      subversionDescriptions[subversion].forEach(item => {
-        const listItem = document.createElement('li');
-        listItem.textContent = item;
-        descriptionList.appendChild(listItem);
+    // Actualizar descripción
+    function updateDescription() {
+      descriptionList.innerHTML = "";
+      subversionDescriptions[currentModel][currentSubversion].forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        descriptionList.appendChild(li);
       });
     }
 
@@ -205,34 +335,7 @@
       }
     });
 
-    // Eventos de cambio de color
-    document.querySelectorAll('.color-button').forEach(button => {
-      button.addEventListener('click', () => {
-        const color = button.getAttribute('data-color');
-        changeColor(color);
-      });
-    });
-
-    // Eventos de cambio de versión
-    document.querySelectorAll('.version-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const version = tab.getAttribute('data-version');
-        changeVersion(version);
-      });
-    });
-
-    // Eventos de cambio de subversión
-    document.querySelectorAll('.subversion-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const subversion = tab.getAttribute('data-subversion');
-        changeSubversion(subversion);
-      });
-    });
-
-    // Inicialización
-    updateSubversionTabs(currentVersion); // Configura las subversiones iniciales para XLI
-    updateDescription(currentSubversion); // Muestra la descripción inicial
+    initialize();
   </script>
-
 </body>
 </html>
