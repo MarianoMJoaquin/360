@@ -47,66 +47,311 @@
 
     const subversionDescriptions = {
       corolla: {
-        mt: ["Transmisión manual", "5 velocidades", "Tracción delantera"],
-        at: ["Transmisión automática", "6 velocidades", "Tracción delantera"],
-        gr: ["Transmisión GR", "6 velocidades deportivas", "Tracción trasera"]
+        "2.0 XLI CVT": ["Transmisión manual", "5 velocidades", "Tracción delantera"],
+        "2.0 XEI CVT": ["Transmisión automática", "6 velocidades", "Tracción delantera"],
+        "2.0 SEG CVT": ["Transmisión GR", "6 velocidades deportivas", "Tracción trasera"]
       },
       yaris: {
-        mt: ["Transmisión manual", "5 velocidades", "Tracción delantera"],
-        cvt: ["Transmisión CVT", "7 velocidades", "Tracción delantera"]
+        "XS 1.5 6M/T 5P": ["Transmisión manual", "5 velocidades", "Tracción delantera"],
+        "XS 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera"],
+        "XLS 1.5 6M/T 5P": ["Transmisión manual", "5 velocidades", "Tracción delantera"],
+        "XLS 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera"],
+        "XLS+ 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera"],
+        "XLS PACK 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera"],
+        "S 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera"]
       },
       hilux_cabina_doble: {
-        mt: ["Transmisión manual", "6 velocidades", "Tracción 4x4"],
-        at: ["Transmisión automática", "6 velocidades", "Tracción 4x4"]
+        "DX 4X2/4X4 6MT": ["Transmisión manual", "6 velocidades", "Tracción 4x4"],
+        "DX 4X2/4X4 6AT": ["Transmisión automática", "6 velocidades", "Tracción 4x4"],
+        "SR 4X2/4X4 6MT": ["Transmisión manual", "6 velocidades", "Tracción 4x4"],
+        "SR 4X2/4X4 6AT": ["Transmisión automática", "6 velocidades", "Tracción 4x4"],
+        "SRV 4X2/4X4 6AT": ["Transmisión automática", "6 velocidades", "Tracción 4x4"],
+        "SRX 4X2/4X4 6AT": ["Transmisión automática", "6 velocidades", "Tracción 4x4"]
+      },
+      hilux_cabina_simple: {
+        "DX 4X2/4X4 MT": ["Transmisión manual", "6 velocidades", "Tracción 4x4"]
+      },
+      hilux_chasis_cabina: {
+        "DX 4X2/4X4 MT": ["Transmisión manual", "6 velocidades", "Tracción 4x4"]
       }
     };
 
     const colors = {
       corolla: {
-        xli: [
-          { name: "Rojo Metalizado", code: "red", hex: "#AC1625" },
-          { name: "Negro Mica", code: "black", hex: "#292826" }
-        ],
-        xei: [
-          { name: "Super Blanco", code: "white", hex: "#F8F8F8" },
-          { name: "Gris Azulado", code: "blue", hex: "#61727B"}
-        ],
-        seg: [
-          { name: "Blanco Perlado", code: "white-perl", hex: "#DBDAD6"},
-          { name: "Gris Plata", code: "silver", hex: "#DCDCDE"}
-        ]
+        xli: {
+          "2.0 XLI CVT": [
+            { name: "Rojo Metalizado", code: "red", hex: "#AC1625" },
+            { name: "Negro Mica", code: "black", hex: "#292826" }
+          ]
+        },
+        xei: {
+          "2.0 XEI CVT": [
+            { name: "Super Blanco", code: "white", hex: "#F8F8F8" },
+            { name: "Gris Azulado", code: "blue", hex: "#61727B"}
+          ]
+        },
+        seg: {
+          "2.0 SEG CVT": [
+            { name: "Blanco Perlado", code: "white-perl", hex: "#DBDAD6"},
+            { name: "Gris Plata", code: "silver", hex: "#DCDCDE"}
+          ]
+        }
       },
       yaris: {
-        xs: [
-          { name: "Rojo", code: "red", hex: "#FF0000" },
-          { name: "Negro", code: "black", hex: "#000000" }
-        ],
-        xls: [
-          { name: "Blanco", code: "white", hex: "#FFFFFF" },
-          { name: "Azul", code: "blue", hex: "#0000FF"}
-        ],
-        s: [
-          { name: "Blanco", code: "white", hex: "#FFFFFF" },
-          { name: "Azul", code: "blue", hex: "#0000FF"}
-        ]
+        xs: {
+          "XS 1.5 6M/T 5P": [
+            { name: "Rojo", code: "red", hex: "#FF0000" },
+            { name: "Negro", code: "black", hex: "#000000" }
+          ],
+          "XS 1.5 CVT 5P": [
+            { name: "Azul", code: "blue", hex: "#0000FF" }
+          ]
+        },
+        xls: {
+          "XLS 1.5 6M/T 5P": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" },
+            { name: "Azul", code: "blue", hex: "#0000FF"}
+          ],
+          "XLS 1.5 CVT 5P": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" },
+            { name: "Azul", code: "blue", hex: "#0000FF"}
+          ],
+          "XLS+ 1.5 CVT 5P": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" },
+            { name: "Azul", code: "blue", hex: "#0000FF"}
+          ],
+          "XLS PACK 1.5 CVT 5P": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" },
+            { name: "Azul", code: "blue", hex: "#0000FF"}
+          ]
+        },
+        s: {
+          "S 1.5 CVT 5P": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" },
+            { name: "Azul", code: "blue", hex: "#0000FF"}
+          ]
+        }
       },
       hilux_cabina_doble: {
-        dx: [
-          { name: "Rojo", code: "red", hex: "#B22222" },
-          { name: "Negro", code: "black", hex: "#111111" }
-        ],
-        sr: [
-          { name: "Blanco", code: "white", hex: "#F5F5F5" },
-          { name: "Gris", code: "gray", hex: "#808080"}
-        ],
-        srv: [
-          { name: "Rojo", code: "red", hex: "#B22222" },
-          { name: "Negro", code: "black", hex: "#111111" }
-        ],
-        srx: [
-          { name: "Blanco", code: "white", hex: "#F5F5F5" },
-          { name: "Gris", code: "gray", hex: "#808080"}
-        ]
+        dx: {
+          "DX 4X2/4X4 6MT": [
+            { name: "Rojo", code: "red", hex: "#B22222" },
+            { name: "Negro", code: "black", hex: "#111111" }
+          ],
+          "DX 4X2/4X4 6AT": [
+            { name: "Rojo", code: "red", hex: "#B22222" },
+            { name: "Negro", code: "black", hex: "#111111" }
+          ]
+        },
+        sr: {
+          "SR 4X2/4X4 6MT": [
+            { name: "Blanco", code: "white", hex: "#F5F5F5" },
+            { name: "Gris", code: "gray", hex: "#808080"}
+          ],
+          "SR 4X2/4X4 6AT": [
+            { name: "Blanco", code: "white", hex: "#F5F5F5" },
+            { name: "Gris", code: "gray", hex: "#808080"}
+          ]
+        },
+        srv: {
+          "SRV 4X2/4X4 6AT": [
+            { name: "Rojo", code: "red", hex: "#B22222" },
+            { name: "Negro", code: "black", hex: "#111111" }
+          ]
+        },
+        srx: {
+          "SRX 4X2/4X4 6AT": [
+            { name: "Blanco", code: "white", hex: "#F5F5F5" },
+            { name: "Gris", code: "gray", hex: "#808080"}
+          ]
+        }
+      },
+      hilux_cabina_simple: {
+        dx: {
+          "DX 4X2/4X4 MT": [
+            { name: "Rojo", code: "red", hex: "#B22222" },
+            { name: "Negro", code: "black", hex: "#111111" }
+          ]
+        }
+      },
+      hilux_chasis_cabina: {
+        dx: {
+          "DX 4X2/4X4 MT": [
+            { name: "Rojo", code: "red", hex: "#B22222" },
+            { name: "Negro", code: "black", hex: "#111111" }
+          ]
+        }
+      },
+      corolla_hybrid: {
+        xei: {
+          "HEV 1.8 XEI eCVT": [
+            { name: "Blanco Perlado", code: "white-perl", hex: "#DBDAD6" },
+            { name: "Gris Plata", code: "silver", hex: "#DCDCDE" }
+          ]
+        },
+        seg: {
+          "HEV 1.8 SEG eCVT": [
+            { name: "Blanco Perlado", code: "white-perl", hex: "#DBDAD6" },
+            { name: "Gris Plata", code: "silver", hex: "#DCDCDE" }
+          ]
+        }
+      },
+      corolla_gr_sport: {
+        "gr-sport": {
+          "2.0 CVT": [
+            { name: "Blanco Perlado", code: "white-perl", hex: "#DBDAD6" },
+            { name: "Negro Mica", code: "black", hex: "#292826" }
+          ]
+        }
+      },
+      yaris_hatchback: {
+        xs: {
+          "XS 1.5 6M/T 5P": [
+            { name: "Rojo", code: "red", hex: "#FF0000" },
+            { name: "Negro", code: "black", hex: "#000000" }
+          ],
+          "XS 1.5 CVT 5P": [
+            { name: "Azul", code: "blue", hex: "#0000FF" }
+          ]
+        },
+        xls: {
+          "XLS 1.5 6M/T 5P": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" },
+            { name: "Azul", code: "blue", hex: "#0000FF"}
+          ],
+          "XLS 1.5 CVT 5P": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" },
+            { name: "Azul", code: "blue", hex: "#0000FF"}
+          ],
+          "XLS+ 1.5 CVT 5P": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" },
+            { name: "Azul", code: "blue", hex: "#0000FF"}
+          ],
+          "XLS PACK 1.5 CVT 5P": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" },
+            { name: "Azul", code: "blue", hex: "#0000FF"}
+          ]
+        },
+        s: {
+          "S 1.5 CVT 5P": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" },
+            { name: "Azul", code: "blue", hex: "#0000FF"}
+          ]
+        }
+      },
+      yaris_sedan: {
+        xls: {
+          "XLS 1.5 6M/T 4P": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" },
+            { name: "Azul", code: "blue", hex: "#0000FF"}
+          ],
+          "XLS 1.5 CVT 4P": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" },
+            { name: "Azul", code: "blue", hex: "#0000FF"}
+          ],
+          "XLS PACK 1.5 CVT 4P": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" },
+            { name: "Azul", code: "blue", hex: "#0000FF"}
+          ]
+        }
+      },
+      hilux_gr_sport_iv: {
+        "gr-sport-iv": {
+          "4X4": [
+            { name: "Rojo", code: "red", hex: "#B22222" },
+            { name: "Negro", code: "black", hex: "#111111" }
+          ]
+        }
+      },
+      corolla_cross: {
+        xli: {
+          "XLI 2.0 CVT": [
+            { name: "Rojo Metalizado", code: "red", hex: "#AC1625" },
+            { name: "Negro Mica", code: "black", hex: "#292826" }
+          ]
+        },
+        xei: {
+          "XEI 2.0 CVT": [
+            { name: "Super Blanco", code: "white", hex: "#F8F8F8" },
+            { name: "Gris Azulado", code: "blue", hex: "#61727B"}
+          ]
+        },
+        seg: {
+          "SEG 2.0 CVT": [
+            { name: "Blanco Perlado", code: "white-perl", hex: "#DBDAD6"},
+            { name: "Gris Plata", code: "silver", hex: "#DCDCDE"}
+          ]
+        }
+      },
+      corolla_cross_hybrid: {
+        xei: {
+          "XEI HEV 1.8 eCVT": [
+            { name: "Blanco Perlado", code: "white-perl", hex: "#DBDAD6" },
+            { name: "Gris Plata", code: "silver", hex: "#DCDCDE" }
+          ]
+        },
+        seg: {
+          "SEG HEV 1.8 eCVT": [
+            { name: "Blanco Perlado", code: "white-perl", hex: "#DBDAD6" },
+            { name: "Gris Plata", code: "silver", hex: "#DCDCDE" }
+          ]
+        }
+      },
+      corolla_cross_gr_sport: {
+        "gr-sport": {
+          "2.0 CVT GR-SPORT": [
+            { name: "Blanco Perlado", code: "white-perl", hex: "#DBDAD6" },
+            { name: "Negro Mica", code: "black", hex: "#292826" }
+          ]
+        }
+      },
+      sw4: {
+        srx: {
+          "SRX 4X4 6AT 7A": [
+            { name: "Blanco Perlado", code: "white-perl", hex: "#DBDAD6" },
+            { name: "Negro Mica", code: "black", hex: "#292826" }
+          ]
+        },
+        diamond: {
+          "DIAMOND 4X4 6AT 7A": [
+            { name: "Blanco Perlado", code: "white-perl", hex: "#DBDAD6" },
+            { name: "Negro Mica", code: "black", hex: "#292826" }
+          ]
+        }
+      },
+      sw4_gr_sport: {
+        "gr-sport": {
+          "4X4 6AT 7A": [
+            { name: "Blanco Perlado", code: "white-perl", hex: "#DBDAD6" },
+            { name: "Negro Mica", code: "black", hex: "#292826" }
+          ]
+        }
+      },
+      hiace_furgon: {
+        l1h1: {
+          "2.8 TDI 6AT 3A": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" }
+          ]
+        },
+        l2h2: {
+          "2.8 TDI 6AT 3A": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" }
+          ]
+        }
+      },
+      hiace_commuter: {
+        commuter: {
+          "2.8 TDI 6AT 14A": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" }
+          ]
+        }
+      },
+      hiace_wagon: {
+        wagon: {
+          "2.8 TDI 6AT 10A": [
+            { name: "Blanco", code: "white", hex: "#FFFFFF" }
+          ]
+        }
       }
     };
 
@@ -132,17 +377,55 @@
         { name: "XLS", slug: "xls", subversions: ["XLS 1.5 6M/T 4P", "XLS 1.5 CVT 4P", "XLS PACK 1.5 CVT 4P"] }
       ],
       hilux_cabina_doble: [
-        { name: "DX", slug: "dx", subversions: ["DX 4X2 6MT", "SR 4X2 6MT", "hola"] },
-        { name: "SR", slug: "sr", subversions: ["mt", "at"] },
-        { name: "SRV", slug: "srv", subversions:["mt", "at"] },
-        { name: "SRX", slug: "srx", subversions:["mt", "at"] }
-      ]
+        { name: "DX", slug: "dx", subversions: ["DX 4X2/4X4 6MT", "DX 4X2/4X4 6AT"] },
+        { name: "SR", slug: "sr", subversions: ["SR 4X2/4X4 6MT", "SR 4X2/4X4 6AT"] },
+        { name: "SRV", slug: "srv", subversions:["SRV 4X2/4X4 6AT"] },
+        { name: "SRX", slug: "srx", subversions:["SRX 4X2/4X4 6AT"] }
+      ],
+      hilux_cabina_simple: [
+        { name: "DX", slug: "dx", subversions: ["DX 4X2/4X4 MT"] }
+      ],
+      hilux_chasis_cabina: [
+        { name: "DX", slug: "dx", subversions: ["DX 4X2/4X4 MT"] }
+      ],
+      hilux_gr_sport_iv: [
+        { name: "GR-Sport IV", slug: "gr-sport-iv", subversions: ["4X4"] }
+      ],
+      corolla_cross: [
+        { name: "XLI", slug: "xli", subversions: ["XLI 2.0 CVT"] },
+        { name: "XEI", slug: "xei", subversions: ["XEI 2.0 CVT"] },
+        { name: "SEG", slug: "seg", subversions: ["SEG 2.0 CVT"] }
+      ],
+      corolla_cross_hybrid: [
+        { name: "XEI", slug: "xei", subversions: ["XEI HEV 1.8 eCVT"] },
+        { name: "SEG", slug: "seg", subversions: ["SEG HEV 1.8 eCVT"] }
+      ],
+      corolla_cross_gr_sport: [
+        { name: "GR-Sport", slug: "gr-sport", subversions: ["2.0 CVT GR-SPORT"] }
+      ],
+      sw4: [
+        { name: "SRX", slug: "srx", subversions: ["SRX 4X4 6AT 7A"] },
+        { name: "DIAMOND", slug: "diamond", subversions: ["DIAMOND 4X4 6AT 7A"] }
+      ],
+      sw4_gr_sport: [
+        { name: "GR-Sport", slug: "gr-sport", subversions: ["4X4 6AT 7A"] }
+      ],
+      hiace_furgon: [
+        { name: "L1H1", slug: "l1h1", subversions: ["2.8 TDI 6AT 3A"] },
+        { name: "L2H2", slug: "l2h2", subversions: ["2.8 TDI 6AT 3A"] }
+      ],
+      hiace_commuter: [
+        { name: "Commuter", slug: "commuter", subversions: ["2.8 TDI 6AT 14A"] }
+      ],
+      hiace_wagon: [
+        { name: "Wagon", slug: "wagon", subversions: ["2.8 TDI 6AT 10A "] }
+      ],
     };
 
     let currentModel = "corolla";
     let currentVersion = "xli";
     let currentColor = "red";
-    let currentSubversion = "mt";
+    let currentSubversion = "2.0 XLI CVT";
     let currentFrame = 0;
     let isDragging = false;
     let startX = 0;
@@ -158,7 +441,7 @@
       currentModel = event.target.value;
       currentVersion = versions[currentModel][0].slug;
       currentSubversion = versions[currentModel][0].subversions[0];
-      currentColor = colors[currentModel][currentVersion][0].code;
+      currentColor = colors[currentModel][currentVersion][currentSubversion][0].code;
       initialize();
     });
 
@@ -182,7 +465,7 @@
         button.addEventListener("click", () => {
           currentVersion = version.slug;
           currentSubversion = version.subversions[0];
-          currentColor = colors[currentModel][currentVersion][0].code;
+          currentColor = colors[currentModel][currentVersion][currentSubversion][0].code;
           updateActiveVersionButton();
           renderSubversionTabs();
           renderColorButtons();
@@ -222,7 +505,10 @@
         tab.dataset.subversion = subversion;
         tab.addEventListener("click", () => {
           currentSubversion = subversion;
+          currentColor = colors[currentModel][currentVersion][currentSubversion][0].code;
           updateActiveSubversionButton();
+          renderColorButtons();
+          updateSprite();
           updateDescription();
         });
         subversionTabs.appendChild(tab);
@@ -245,7 +531,7 @@
     // Renderizar botones de colores
     function renderColorButtons() {
       colorButtons.innerHTML = "";
-      colors[currentModel][currentVersion].forEach((color) => {
+      colors[currentModel][currentVersion][currentSubversion].forEach((color) => {
         const button = document.createElement("button");
         button.className = `w-8 h-8 rounded-full border-2 border-gray-300 hover:scale-110 transition-transform duration-200`;
         button.style.backgroundColor = color.hex;
