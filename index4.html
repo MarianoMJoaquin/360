@@ -13,7 +13,7 @@
       <!-- Selector de modelo -->
       <select id="modelSelector" class="mb-4 p-2 rounded-md border border-gray-300">
         <option value="corolla">Corolla</option>
-        <option value="yaris">Yaris</option>
+        <option value="yaris_hatchback">Yaris</option>
         <option value="hilux_cabina_doble">Hilux Cabina Doble</option>
       </select>
 
@@ -29,6 +29,7 @@
 
       <!-- Selectores de Color -->
       <div id="colorButtons" class="flex justify-center space-x-2 md:space-x-4"></div>
+      <p id="selectedColorName" class="text-center font-semibold mt-2"></p>
     </div>
 
     <!-- Columna Derecha -->
@@ -51,7 +52,7 @@
         "2.0 XEI CVT": ["Transmisión automática", "6 velocidades", "Tracción delantera"],
         "2.0 SEG CVT": ["Transmisión GR", "6 velocidades deportivas", "Tracción trasera"]
       },
-      yaris: {
+      yaris_hatchback: {
         "XS 1.5 6M/T 5P": ["Transmisión manual", "5 velocidades", "Tracción delantera"],
         "XS 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera"],
         "XLS 1.5 6M/T 5P": ["Transmisión manual", "5 velocidades", "Tracción delantera"],
@@ -97,41 +98,6 @@
           ]
         }
       },
-      yaris: {
-        xs: {
-          "XS 1.5 6M/T 5P": [
-            { name: "Rojo", code: "red", hex: "#FF0000" },
-            { name: "Negro", code: "black", hex: "#000000" }
-          ],
-          "XS 1.5 CVT 5P": [
-            { name: "Azul", code: "blue", hex: "#0000FF" }
-          ]
-        },
-        xls: {
-          "XLS 1.5 6M/T 5P": [
-            { name: "Blanco", code: "white", hex: "#FFFFFF" },
-            { name: "Azul", code: "blue", hex: "#0000FF"}
-          ],
-          "XLS 1.5 CVT 5P": [
-            { name: "Blanco", code: "white", hex: "#FFFFFF" },
-            { name: "Azul", code: "blue", hex: "#0000FF"}
-          ],
-          "XLS+ 1.5 CVT 5P": [
-            { name: "Blanco", code: "white", hex: "#FFFFFF" },
-            { name: "Azul", code: "blue", hex: "#0000FF"}
-          ],
-          "XLS PACK 1.5 CVT 5P": [
-            { name: "Blanco", code: "white", hex: "#FFFFFF" },
-            { name: "Azul", code: "blue", hex: "#0000FF"}
-          ]
-        },
-        s: {
-          "S 1.5 CVT 5P": [
-            { name: "Blanco", code: "white", hex: "#FFFFFF" },
-            { name: "Azul", code: "blue", hex: "#0000FF"}
-          ]
-        }
-      },
       hilux_cabina_doble: {
         dx: {
           "DX 4X2/4X4 6MT": [
@@ -145,7 +111,7 @@
         },
         sr: {
           "SR 4X2/4X4 6MT": [
-            { name: "Blanco", code: "white", hex: "#F5F5F5" },
+            { name: "Negro Mica", code: "black", hex: "#111111" },
             { name: "Gris", code: "gray", hex: "#808080"}
           ],
           "SR 4X2/4X4 6AT": [
@@ -499,7 +465,7 @@
       version.subversions.forEach((subversion) => {
         const tab = document.createElement("button");
         tab.textContent = subversion.toUpperCase();
-        tab.className = `subversion-tab px-4 py-2 rounded-md font-semibold transition-colors duration-200 ${
+        tab.className = `subversion-tab text-xs px-4 py-2 rounded-md font-semibold transition-colors duration-200 ${
           currentSubversion === subversion ? "bg-gray-700 text-white" : "bg-gray-300 hover:bg-gray-400 text-gray-700"
         }`;
         tab.dataset.subversion = subversion;
@@ -538,9 +504,16 @@
         button.addEventListener("click", () => {
           currentColor = color.code;
           updateSprite();
+          updateSelectedColorName(color.name);
         });
         colorButtons.appendChild(button);
       });
+      updateSelectedColorName(colors[currentModel][currentVersion][currentSubversion][0].name);
+    }
+
+    function updateSelectedColorName(colorName) {
+      const selectedColorNameElement = document.getElementById("selectedColorName");
+      selectedColorNameElement.textContent = `Color seleccionado: ${colorName}`;
     }
 
     // Actualizar sprite del visor
