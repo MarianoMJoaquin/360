@@ -536,7 +536,7 @@
     const descriptionList = document.getElementById("descriptionList");
     const viewer = document.getElementById("viewer");
 
-    const imageCache = new Map();
+    const imageCache = new Map(); // Caché de imágenes para precargar sprites de colores de modelos de vehículos seleccionados por el usuario.
 
     modelSelector.addEventListener("change", (event) => {
       currentModel = event.target.value;
@@ -556,14 +556,14 @@
       updateDescription();
     }
 
-    function preloadImages() {
+    function preloadImages() { // Precargar imágenes para una carga más rápida de los sprites de colores de los modelos de vehículos seleccionados por el usuario.
       const imageUrls = [];
       versions[currentModel].forEach(version => {
         version.subversions.forEach(subversion => {
           colors[currentModel][version.slug][subversion].forEach(color => {
             const imageUrl = `${currentModel}/${currentModel}-${version.slug}-${color.code}.png`;
             imageUrls.push(imageUrl);
-            if (!imageCache.has(imageUrl)) {
+            if (!imageCache.has(imageUrl)) { // Solo precargar imágenes que no estén en la caché. Esto evita la duplicación de imágenes en la caché.
               const img = new Image();
               img.src = imageUrl;
               imageCache.set(imageUrl, img);
@@ -572,6 +572,11 @@
         });
       });
     }
+
+    // 
+    window.addEventListener('beforeunload', () => { // Limpiar caché de imágenes al cerrar la ventana o cambiar de página.
+      imageCache.clear();
+    });
 
     // Inicializar la aplicación al cargar la página y precargar las imágenes para una carga más rápida de los sprites.
     window.addEventListener('load', () => {
@@ -781,6 +786,7 @@
      * 17. Se define la función animate para animar el visor mientras se arrastra.
      * 18. Se añaden los eventos de mousedown, mouseup, mouseleave, mousemove, touchstart, touchend y touchmove al visor para controlar el arrastre.
      * 19. Se llama a la función initialize para iniciar el visor.
+     * 20. Se añade un evento beforeunload para limpiar la caché de imágenes cuando el usuario navega fuera de la página o cierra el navegador.
      */
 
 
