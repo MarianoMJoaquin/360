@@ -541,8 +541,9 @@
       currentVersion = versions[currentModel][0].slug;
       currentSubversion = versions[currentModel][0].subversions[0];
       currentColor = colors[currentModel][currentVersion][currentSubversion][0].code;
-      //currentFrame = 0; // Reset to initial frame
+      currentFrame = 0; // Reset to initial frame
       initialize();
+      preloadImages();
     });
 
     function initialize() {
@@ -552,6 +553,28 @@
       updateSprite();
       updateDescription();
     }
+
+    function preloadImages() {
+      const imageUrls = [];
+      versions[currentModel].forEach(version => {
+        version.subversions.forEach(subversion => {
+          colors[currentModel][version.slug][subversion].forEach(color => {
+            imageUrls.push(`${currentModel}/${currentModel}-${version.slug}-${color.code}.png`);
+          });
+        });
+      });
+
+      imageUrls.forEach(url => {
+        const img = new Image();
+        img.src = url;
+      });
+    }
+
+    // Inicializar la aplicación al cargar la página y precargar las imágenes para una carga más rápida de los sprites.
+    window.addEventListener('load', () => {
+      initialize();
+      preloadImages();
+    });
 
     // Renderizar tabs de versiones
     function renderVersionTabs() {
