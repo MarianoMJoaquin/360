@@ -536,6 +536,8 @@
     const descriptionList = document.getElementById("descriptionList");
     const viewer = document.getElementById("viewer");
 
+    const imageCache = new Map();
+
     modelSelector.addEventListener("change", (event) => {
       currentModel = event.target.value;
       currentVersion = versions[currentModel][0].slug;
@@ -559,14 +561,15 @@
       versions[currentModel].forEach(version => {
         version.subversions.forEach(subversion => {
           colors[currentModel][version.slug][subversion].forEach(color => {
-            imageUrls.push(`${currentModel}/${currentModel}-${version.slug}-${color.code}.png`);
+            const imageUrl = `${currentModel}/${currentModel}-${version.slug}-${color.code}.png`;
+            imageUrls.push(imageUrl);
+            if (!imageCache.has(imageUrl)) {
+              const img = new Image();
+              img.src = imageUrl;
+              imageCache.set(imageUrl, img);
+            }
           });
         });
-      });
-
-      imageUrls.forEach(url => {
-        const img = new Image();
-        img.src = url;
       });
     }
 
