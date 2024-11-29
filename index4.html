@@ -13,7 +13,7 @@
   </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
-  <div class="flex bg-white p-5 rounded-lg flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 w-full max-w-4xl shadow-lg">
+  <div class="flex bg-white p-5 rounded-lg flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 w-full shadow-lg">
     <!-- Columna Izquierda -->
     <div class="flex flex-col items-center space-y-4 w-full md:w-2/3">
       <!-- Selector de modelo -->
@@ -27,7 +27,7 @@
       <div id="versionTabs" class="flex justify-center md:justify-start space-x-2 md:space-x-4 mb-4"></div>
 
       <!-- Visor 360° -->
-      <div id="viewer" class="viewer-container w-full h-[200px] md:h-[316px] overflow-hidden cursor-grab bg-cover bg-no-repeat"></div>
+      <div id="viewer" class="w-full md:w-1/2 h-[200px] md:h-[316px] overflow-hidden cursor-grab bg-cover bg-no-repeat"></div>
 
       <div class="flex justify-center space-x-4 font-semibold italic text-gray-600">
         <p>Arrastra para girar</p>
@@ -59,13 +59,32 @@
         "2.0 SEG CVT": ["Transmisión GR", "6 velocidades deportivas", "Tracción trasera"]
       },
       yaris_hatchback: {
-        "XS 1.5 6M/T 5P": ["Transmisión manual", "5 velocidades", "Tracción delantera"],
-        "XS 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera"],
-        "XLS 1.5 6M/T 5P": ["Transmisión manual", "5 velocidades", "Tracción delantera"],
-        "XLS 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera"],
-        "XLS+ 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera"],
-        "XLS PACK 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera"],
-        "S 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera"]
+        "XS 1.5 6M/T 5P": [
+          "Motor 1,5 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 107 CV de potencia máxima Manual de 6 velocidades",
+          "Espejos exteriores con regulación eléctrica y luz de de giro incorporada",
+          "Luces de circulación diurnas de LED (DRL)",
+          "Ópticas delanteras halógenas con regulación en altura",
+          "Llantas de acero de 15”",
+          "Levanta cristales eléctricos con función “One Touch” - conductor",
+          "Computadora de abordo",
+          "Volante con control de audio, display de información múltiple y teléfono",
+          "Audio con pantalla táctil LCD de 6.8” y USB (en consola central)",
+          "Conectividad: Apple Car Play® & Android Auto®",
+          "Control de estabilidad (VSC), control de tracción (TRC) y asistente de arranque en pendientes (HAC)",
+          "Faros antiniebla traseros",
+          "7 airbags: frontales (x2), de rodilla (conductor), laterales (x2) y de cortina (x2)"
+        ],
+        "XS 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera", "Motor 1.5L", "5 puertas"],
+        "XLS 1.5 6M/T 5P": ["Transmisión manual", "6 velocidades", "Tracción delantera", "Motor 1.5L", "5 puertas"],
+        "XLS 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera", "Motor 1.5L", "5 puertas"],
+        "XLS+ 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera", "Motor 1.5L", "5 puertas"],
+        "XLS PACK 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera", "Motor 1.5L", "5 puertas"],
+        "S 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera", "Motor 1.5L", "5 puertas"]
+      },
+      yaris_sedan: {
+        "XLS 1.5 6M/T 4P": ["Transmisión manual", "6 velocidades", "Tracción delantera", "Motor 1.5L", "4 puertas"],
+        "XLS 1.5 CVT 4P": ["Transmisión CVT", "7 velocidades", "Tracción delantera", "Motor 1.5L", "4 puertas"],
+        "XLS PACK 1.5 CVT 4P": ["Transmisión CVT", "7 velocidades", "Tracción delantera", "Motor 1.5L", "4 puertas"]
       },
       hilux_cabina_doble: {
         "DX 4X2/4X4 6MT": ["Transmisión manual", "6 velocidades", "Tracción 4x4"],
@@ -80,6 +99,44 @@
       },
       hilux_chasis_cabina: {
         "DX 4X2/4X4 MT": ["Transmisión manual", "6 velocidades", "Tracción 4x4"]
+      },
+      hilux_gr_sport_iv: {
+        "4X4": ["Transmisión automática", "6 velocidades", "Tracción 4x4", "Suspensión deportiva"]
+      },
+      corolla_hybrid: {
+        "HEV 1.8 XEI eCVT": ["Transmisión eCVT", "Motor híbrido", "Tracción delantera"],
+        "HEV 1.8 SEG eCVT": ["Transmisión eCVT", "Motor híbrido", "Tracción delantera"]
+      },
+      corolla_gr_sport: {
+        "2.0 CVT": ["Transmisión CVT", "Motor 2.0L", "Tracción delantera", "Suspensión deportiva"]
+      },
+      corolla_cross: {
+        "XLI 2.0 CVT": ["Transmisión CVT", "Motor 2.0L", "Tracción delantera"],
+        "XEI 2.0 CVT": ["Transmisión CVT", "Motor 2.0L", "Tracción delantera"],
+        "SEG 2.0 CVT": ["Transmisión CVT", "Motor 2.0L", "Tracción delantera"]
+      },
+      corolla_cross_hybrid: {
+        "XEI HEV 1.8 eCVT": ["Transmisión eCVT", "Motor híbrido", "Tracción delantera"],
+        "SEG HEV 1.8 eCVT": ["Transmisión eCVT", "Motor híbrido", "Tracción delantera"]
+      },
+      corolla_cross_gr_sport: {
+        "2.0 CVT GR-SPORT": ["Transmisión CVT", "Motor 2.0L", "Tracción delantera", "Suspensión deportiva"]
+      },
+      sw4: {
+        "SRX 4X4 6AT 7A": ["Transmisión automática", "6 velocidades", "Tracción 4x4", "7 asientos"],
+        "DIAMOND 4X4 6AT 7A": ["Transmisión automática", "6 velocidades", "Tracción 4x4", "7 asientos", "Acabados de lujo"]
+      },
+      sw4_gr_sport: {
+        "4X4 6AT 7A": ["Transmisión automática", "6 velocidades", "Tracción 4x4", "7 asientos", "Suspensión deportiva"]
+      },
+      hiace_furgon: {
+        "2.8 TDI 6AT 3A": ["Transmisión automática", "6 velocidades", "Motor 2.8L TDI", "3 asientos"]
+      },
+      hiace_commuter: {
+        "2.8 TDI 6AT 14A": ["Transmisión automática", "6 velocidades", "Motor 2.8L TDI", "14 asientos"]
+      },
+      hiace_wagon: {
+        "2.8 TDI 6AT 10A": ["Transmisión automática", "6 velocidades", "Motor 2.8L TDI", "10 asientos"]
       }
     };
 
@@ -588,7 +645,7 @@
     });
 
     // Renderizar tabs de versiones
-    function renderVersionTabs() {
+    function renderVersionTabs() { 
       versionTabs.innerHTML = "";
       versions[currentModel].forEach((version) => {
         const button = document.createElement("button");
