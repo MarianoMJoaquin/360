@@ -27,7 +27,7 @@
       <div id="versionTabs" class="flex justify-center md:justify-start space-x-2 md:space-x-4 mb-4"></div>
 
       <!-- Visor 360° -->
-      <div id="viewer" class="w-full md:w-1/2 h-[200px] md:h-[316px] overflow-hidden cursor-grab bg-cover bg-no-repeat"></div>
+      <div id="viewer" class="w-full lg:w-1/2 h-[200px] md:h-[316px] overflow-hidden cursor-grab bg-cover bg-no-repeat"></div>
 
       <div class="flex justify-center space-x-4 font-semibold italic text-gray-600">
         <p>Arrastra para girar</p>
@@ -54,9 +54,68 @@
 
     const subversionDescriptions = {
       corolla: {
-        "2.0 XLI CVT": ["Transmisión manual", "5 velocidades", "Tracción delantera"],
-        "2.0 XEI CVT": ["Transmisión automática", "6 velocidades", "Tracción delantera"],
-        "2.0 SEG CVT": ["Transmisión GR", "6 velocidades deportivas", "Tracción trasera"]
+        "2.0 XLI CVT": [
+          "Motor 2,0 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 171 CV de potencia máxima Automático CVT de 10 velocidades",
+          "Espejos exteriores con regulación eléctrica, luz de giro incorporada y retráctiles",
+          "Ópticas delanteras halógenos con proyector y regulación en altura",
+          "Luces DRL de LED",
+          "Ópticas traseras con LED",
+          "Sistema automático de encendido de luces",
+          "Llantas de aleación de 16\"",
+          "Display de información múltiple con pantalla a color de 7\"",
+          "Levanta cristales eléctricos con función 'One Touch' en las 4 puertas",
+          "Volante con control de audio, display de información múltiple y teléfono",
+          "Monitor con cámara de estacionamiento",
+          "Audio con pantalla táctil de 9\" con manos libres y Bluetooth",
+          "Conectividad: Apple CarPlay ® & Android Auto® inalámbrica**",
+          "Modo de transmisión secuencial",
+          "Control de estabilidad (VSC) y Control de tracción (TRC)",
+          "Asistencia de arranque en pendientes (HAC)",
+          "7 airbags: frontales (x2), de rodilla (conductor), laterales (x2) y de cortina (x2)",
+          "Asistencia activa en curvas (ACA)",
+          "Limitador automático de velocidad (ASL)",
+          "Faros antiniebla de LED",
+          "Alarma antirrobo e inmovilizador de motor",
+          "Toyota Safety Sense:*",
+          "Control de velocidad crucero adaptativo (ACC)*",
+          "Sistema de pre colisión frontal (PCS)*",
+          "Sistema de alerta de cambio de carril (LDA)*",
+          "Sistema de luces altas automáticas (AHB)*",
+          "Sistema de alerta de vaivén (SWS)*"
+        ],
+        "2.0 XEI CVT": [
+          "Motor 2,0 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 171 CV de potencia máxima Automático CVT de 10 velocidades",
+          "Incluye funciones selectas 2.0 XLI CVT, más:",
+          "Faros delanteros Bi-LED con regulación en altura",
+          "Aire acondicionado con climatizador automático digital Bi-Zona",
+          "Salidas de aire acondicionado y regulador para plazas traseras",
+          "2 puertos USB tipo 'C' en plazas traseras",
+          "Asientos tapizados de tela combinado con cuero ecológico",
+          "Apoyabrazos delantero tapizado en cuero ecológico",
+          "Techo solar con apertura eléctrica",
+          "Espejo retrovisor interno con anti-encandilamiento automático",
+          "Volante revestido en cuero",
+          "Sensores de estacionamiento delanteros y traseros",
+          "Tuerca de seguridad para llantas"
+        ],
+        "2.0 SEG CVT": [
+          "Motor 2,0 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 171 CV de potencia máxima Automático CVT de 10 velocidades",
+          "Incluye funciones selectas 2.0 XEI CVT, más:",
+          "Espejos exteriores retráctiles automáticos y con desempañador",
+          "Ópticas traseras Full LED",
+          "Llantas de aleación de 17\"",
+          "Asientos tapizados de cuero natural y ecológico",
+          "Asiento del conductor con regulación eléctrica",
+          "Display de información múltiple con pantalla a color de 12.3\"",
+          "Bandeja de baúl",
+          "Cargador inalámbrico para celulares**",
+          "Levas al volante",
+          "Modo de conducción SPORT",
+          "Sensor de lluvia",
+          "Sistema de encendido por botón (Push Start Button) y Sistema de ingreso inteligente (Smart Entry System)",
+          "Alerta de punto ciego (BSM)",
+          "Alerta de tráfico trasero (RCTA)"
+        ]
       },
       yaris_hatchback: {
         "XS 1.5 6M/T 5P": [
@@ -74,17 +133,97 @@
           "Faros antiniebla traseros",
           "7 airbags: frontales (x2), de rodilla (conductor), laterales (x2) y de cortina (x2)"
         ],
-        "XS 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera", "Motor 1.5L", "5 puertas"],
-        "XLS 1.5 6M/T 5P": ["Transmisión manual", "6 velocidades", "Tracción delantera", "Motor 1.5L", "5 puertas"],
-        "XLS 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera", "Motor 1.5L", "5 puertas"],
-        "XLS+ 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera", "Motor 1.5L", "5 puertas"],
-        "XLS PACK 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera", "Motor 1.5L", "5 puertas"],
-        "S 1.5 CVT 5P": ["Transmisión CVT", "7 velocidades", "Tracción delantera", "Motor 1.5L", "5 puertas"]
+        "XS 1.5 CVT 5P": [
+          "Motor 1,5 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 107 CV de potencia máxima Transmisión CVT de 7 velocidades",
+          "Incluye funciones selectas XS MT, más: Caja automática CVT de 7 velocidades "
+        ],
+        "XLS 1.5 6M/T 5P": [
+          "Motor 1,5 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 107 CV de potencia máxima Manual de 6 velocidades",
+          "Incluye funciones selectas XS MT, más:",
+          "Espejos exteriores retráctiles eléctricamente",
+          "Ópticas delanteras halógenas con regulación en altura y proyector",
+          "Ópticas traseras LED",
+          "Llantas de aleación de 15”",
+          "Aire acondicionado con climatizador automático digital",
+          "Espejo retrovisor interno con anti-encandilamiento automático",
+          "Levanta cristales eléctricos con función “One Touch” - 4 puertas",
+          "Monitor con cámara de estacionamiento",
+          "Faros antiniebla delanteros",
+          "Sensores de estacionamiento frontales y traseros"
+        ],
+        "XLS 1.5 CVT 5P": [
+          "Motor 1,5 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 107 CV de potencia máxima Automático CVT de 7 velocidades",
+          "Incluye funciones selectas XLS MT, más:",
+          "Caja automática CVT de 7 velocidades",
+          "Control de velocidad crucero"
+        ],
+        "XLS+ 1.5 CVT 5P": [
+          "Motor 1,5 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 107 CV de potencia máxima Automático CVT de 7 velocidades",
+          "Incluye funciones selectas XLS+ CVT, más:",
+          "Llantas de aleación de 16”"
+        ],
+        "XLS PACK 1.5 CVT 5P": [
+          "Motor 1,5 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 107 CV de potencia máxima Automático CVT de 7 velocidades",
+          "Incluye funciones selectas XLS+ CVT, más:",
+          "Asientos con tapizado de cuero ecológico",
+          "Paddle Shifts (levas al volante)",
+          "Display de información múltiple de 4,2”",
+          "Toyota Safety Sense*:",
+          "Sistema de pre-colisión frontal (PCS)*",
+          "Sistema de alerta de cambio de carril (LDA)*",
+          "*Toyota Safety Sense, integra diferentes sistemas de seguridad activa que pueden variar según cada modelo y/o versión. A su vez, estos sistemas están diseñados para asistir al conductor, no para sustituirlo. El conductor debe mantener en todo momento el control de su vehículo y es responsable de su conducción, por cuanto este sistema no remplaza la conducción segura. El correcto funcionamiento del Toyota Safety Sense depende de muchos factores incluyendo las condiciones del camino, el clima y el vehículo, razón por la cual el/los sistemas podrán verse afectados u obstaculizados debido a factores externos, no siendo Toyota Argentina S.A. responsable de las consecuencias derivadas del uso del sistema. Para más información sobre Toyota Safety Sense consulte el manual de usuario."
+        ],
+        "S 1.5 CVT 5P": [
+          "Motor 1,5 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 107 CV de potencia máxima",
+          "Automático CVT de 7 velocidades",
+          "Incluye funciones selectas XLS PACK CVT, más:",
+          "Ópticas delanteras LED con regulación en altura",
+          "Techo solar eléctrico",
+          "Manijas exteriores cromadas",
+          "Sistema de encendido por botón (Push Start Button) y Sistema de ingreso inteligente (Smart Entry System)"
+        ]
       },
       yaris_sedan: {
-        "XLS 1.5 6M/T 4P": ["Transmisión manual", "6 velocidades", "Tracción delantera", "Motor 1.5L", "4 puertas"],
-        "XLS 1.5 CVT 4P": ["Transmisión CVT", "7 velocidades", "Tracción delantera", "Motor 1.5L", "4 puertas"],
-        "XLS PACK 1.5 CVT 4P": ["Transmisión CVT", "7 velocidades", "Tracción delantera", "Motor 1.5L", "4 puertas"]
+        "XLS 1.5 6M/T 4P": [
+          "Motor 1,5 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 107 CV de potencia máxima Manual de 6 velocidades",
+          "Espejos exteriores retráctiles con regulación eléctrica y luz de de giro incorporada",
+          "Llantas de aleación de 15”",
+          "Luces de circulación diurnas de LED (DRL)",
+          "Ópticas delanteras halógenas con regulación en altura y proyector",
+          "Ópticas traseras LED",
+          "Aire acondicionado con climatizador automático digital",
+          "Espejo retrovisor interno con anti-encandilamiento automático",
+          "Levanta cristales eléctricos con función “One Touch” - 4 puertas",
+          "Computadora de abordo",
+          "Volante con control de audio, display de información múltiple y teléfono",
+          "Audio con pantalla táctil LCD de 6.8” y USB (en consola central)",
+          "Conectividad: Apple Car Play® & Android Auto®",
+          "Monitor con cámara de estacionamiento",
+          "Control de estabilidad (VSC), control de tracción (TRC) y asistente de arranque en pendientes (HAC)",
+          "Faros antiniebla",
+          "7 airbags: frontales (x2), de rodilla (conductor), laterales (x2) y de cortina (x2)",
+          "Sensores de estacionamiento frontales y traseros",
+          "Tuerca de seguridad para llantas"
+        ],
+        "XLS 1.5 CVT 4P": [
+          "Motor 1,5 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 107 CV de potencia máxima",
+          "Automático CVT de 7 velocidades",
+          "Incluye funciones selectas XLS MT, más:",
+          "Caja automática CVT de 7 velocidades",
+          "Control de velocidad crucero"
+        ],
+        "XLS PACK 1.5 CVT 4P": [
+          "Motor 1,5 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 107 CV de potencia máxima",
+          "Automático CVT de 7 velocidades",
+          "Incluye funciones selectas XLS CVT, más:",
+          "Llantas de aleación de 16”",
+          "Asientos con tapizado de cuero ecológico",
+          "Paddle Shifts (levas al volante)",
+          "Display de información múltiple de 4,2”",
+          "Toyota Safety Sense*:",
+          "Sistema de pre-colisión frontal (PCS)*",
+          "Sistema de alerta de cambio de carril (LDA)*"
+         ]
       },
       hilux_cabina_doble: {
         "DX 4X2/4X4 6MT": ["Transmisión manual", "6 velocidades", "Tracción 4x4"],
@@ -117,7 +256,7 @@
       },
       corolla_cross_hybrid: {
         "XEI HEV 1.8 eCVT": ["Transmisión eCVT", "Motor híbrido", "Tracción delantera"],
-        "SEG HEV 1.8 eCVT": ["Transmisión eCVT", "Motor híbrido", "Tracción delantera"]
+        "SEG HEV 1.8 eCVT": ["Transmisión eCVT", "Motor híbrido", "Tracci��n delantera"]
       },
       corolla_cross_gr_sport: {
         "2.0 CVT GR-SPORT": ["Transmisión CVT", "Motor 2.0L", "Tracción delantera", "Suspensión deportiva"]
