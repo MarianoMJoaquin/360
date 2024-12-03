@@ -19,8 +19,22 @@
       <!-- Selector de modelo -->
       <select id="modelSelector" class="mb-4 p-2 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
         <option value="corolla">Corolla</option>
+        <option value="corolla_gr_sport">Corolla GR SPORT</option>
+        <option value="corolla_hybrid">Corolla Hybrid</option>
+        <option value="corolla_cross">Corolla Cross</option>
+        <option value="corolla_cross_hybrid">Corolla Cross Hybrid</option>
+        <option value="corolla_cross_gr_sport">Corolla Cross GR SPORT</option>
         <option value="yaris_hatchback">Yaris</option>
+        <option value="yaris_sedan">Yaris Sedán</option>
         <option value="hilux_cabina_doble">Hilux Cabina Doble</option>
+        <option value="hilux_cabina_simple">Hilux Cabina Simple</option>
+        <option value="hilux_chasis_cabina">Hilux Chasis Cabina</option>
+        <option value="hilux_gr_sport_iv">Hilux GR SPORT IV</option>
+        <option value="sw4">SW4</option>
+        <option value="sw4_gr_sport">SW4 GR SPORT</option>
+        <option value="hiace_furgon">Hiace Furgón</option>
+        <option value="hiace_commuter">Hiace Commuter</option>
+        <option value="hiace_wagon">Hiace Wagon</option>
       </select>
 
       <!-- Tabs de versión -->
@@ -363,42 +377,354 @@
         ]
       },
       hilux_gr_sport_iv: {
-        "4X4": ["Transmisión automática", "6 velocidades", "Tracción 4x4", "Suspensión deportiva"]
+        "4X4": [
+          "Motor 2,8 litros de 4 cilindros y 16 válvulas con 224 CV de potencia máxima Automático de 6 velocidades",
+          "Motor 2,8l de 224 CV",
+          "Llantas de aleación de 17\" de diseño exclusivo GR con neumáticos 265/65 R17\" AT",
+          "Barra tubular negra",
+          "Techo Bitono negro*(1)",
+          "*(1) Solo disponible en color Blanco perlado o Rojo"
+        ]
       },
       corolla_hybrid: {
-        "HEV 1.8 XEI eCVT": ["Transmisión eCVT", "Motor híbrido", "Tracción delantera"],
-        "HEV 1.8 SEG eCVT": ["Transmisión eCVT", "Motor híbrido", "Tracción delantera"]
+        "HEV 1.8 XEI eCVT": [
+          "Motorización Híbrida 1,8 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 122 CV de potencia máxima Automático eCVT",
+          "Motor Hibrido",
+          "Modo de conducción EV",
+          "Transmisión automática e-CVT",
+          "Espejos exteriores con regulación eléctrica, luz de giro incorporada y retráctiles",
+          "Ópticas delanteras Bi-LED con regulación en altura",
+          "Luces DRL de LED",
+          "Ópticas traseras con LED",
+          "Sistema automático de encendido de luces",
+          "Llantas de aleación de 16\"",
+          "Aire acondicionado con climatizador automático digital Bi-Zona",
+          "Salidas de aire acondicionado y regulador para plazas traseras",
+          "2 puertos USB tipo \"C \" en plazas tarseras",
+          "Asientos tapizados de tela combinado con cuero ecológico",
+          "Apoyabrazos delantero tapizado en cuero ecológico",
+          "Display de información múltiple con pantalla a color de 7\"",
+          "Espejo retrovisor interno con anti-encandilamiento automático",
+          "Levanta cristales eléctricos con función \"One Touch\" en las 4 plazas",
+          "Volante revestido en cuero",
+          "Volante con control de audio, display de información múltiple y teléfono",
+          "Modos de conducción normal, ECO, SPORT y EV",
+          "Monitor con cámara de estacionamiento",
+          "Sensores de estacionamiento delanteros y traseros",
+          "Sistema de encendido por botón (Push Start Button) y Sistema de ingreso inteligente (Smart Entry System)",
+          "Audio con pantalla táctil de 9\" con manos libres y Bluetooth",
+          "Conectividad: Apple Car Play ® & Android Auto® inalámbrica**",
+          "7 airbags: frontales (x2), de rodilla (conductor), laterales (x2) y de cortina (x2)",
+          "Control de estabilidad (VSC) y Control de tracción (TRC) y Asistencia de arranque en pendientes (HAC)",
+          "Asistencia activa en curvas (ACA)",
+          "Limitador automático de velocidad (ASL)",
+          "Faros antiniebla de LED",
+          "Alarma antirrobo e inmovilizador de motor",
+          "Tuerca de seguridad para llantas",
+          "Toyota Safety Sense:**",
+          "Control de velocidad crucero adaptativo (ACC)*",
+          "Sistema de pre colisión frontal (PCS)*",
+          "Sistema de alerta de cambio de carril (LDA)*",
+          "Sistema de luces altas automáticas (AHB)*",
+          "Sistema de alerta de vaivén (SWS)*"
+        ],
+        "HEV 1.8 SEG eCVT": [
+          "Motorización Híbrida 1,8 litros de 4 cilindros y 16 válvulas con Regulación Variable de Válvulas con Inteligencia 13,0 con 122 CV de potencia máxima Automático eCVT",
+          "Incluye funciones selectas HEV 1.8 XEI eCVT, más:",
+          "Espejos exteriores retráctiles automáticos y con desempañador",
+          "Ópticas traseras Full LED",
+          "Llantas de aleación de 17\"",
+          "Asientos tapizados de cuero natural y ecológico",
+          "Asiento del conductor con regulación eléctrica",
+          "Display de información múltiple con pantalla a color de 12.3\"",
+          "Bandeja de baúl",
+          "Cargador inalámbrico para celulares**",
+          "Sensor de lluvia"
+        ]
       },
       corolla_gr_sport: {
-        "2.0 CVT": ["Transmisión CVT", "Motor 2.0L", "Tracción delantera", "Suspensión deportiva"]
+        "2.0 CVT": [
+          "Motor 2 Litros, de 4 cilindros y 16 válvulas con 171 CV de potencia máxima Automático CVT, secuencial de 10 velocidades",
+          "Techo solar",
+          "Puerto USB tipo C (x2)",
+          "Nuevo diseño de llanta",
+          "TFT eléctronico",
+          "TSS, BSM, RCTA",
+          "Display Audio de 9''",
+          "Salida de Aire Acondicionado en las plazas traseras"
+        ]
       },
       corolla_cross: {
-        "XLI 2.0 CVT": ["Transmisión CVT", "Motor 2.0L", "Tracción delantera"],
-        "XEI 2.0 CVT": ["Transmisión CVT", "Motor 2.0L", "Tracción delantera"],
-        "SEG 2.0 CVT": ["Transmisión CVT", "Motor 2.0L", "Tracción delantera"]
+        "XLI 2.0 CVT": [
+          "Dynamic Force 2.0L Dual VVT-i, 4 cilindros en línea con 16 válvulas DOHC con 171 CV de potencia máxima Automático \"Direct Shift CVT\" de 10 velocidades preprogramadas",
+          "Transmisión automática Direct Shift CVT De 10 velocidades",
+          "Llantas de aleacion de 17”",
+          "Faros delanteros Bi-LED con regulación en altura",
+          "Sistema automático de encendido de luces",
+          "Faros antinieblas LED",
+          "Faros traseros de LED con efecto cortina",
+          "Espejos exteriores con regulación eléctrica, luz de giro incorporada y retráctiles automaticamente",
+          "Aire acondicionado con climatizador automático digital",
+          "Freno de mano eletrónico con función \"Auto Hold\"",
+          "Display de información múltiple con pantalla a color de 7”",
+          "Volante con control de audio, display de información múltiple y teléfono",
+          "Monitor con cámara de estacionamiento",
+          "Audio con pantalla táctil de 9\" con manos libres y Bluetooth",
+          "Conectividad: AppleCar Play ® & Android Auto® inalámbrica**",
+          "Puertos USB (x2) en plazas traseras",
+          "7 airbags: frontales (x2), de rodilla (conductor), laterales (x2) y de cortina (x2)",
+          "Tuerca de seguridad para llantas",
+          "Toyota Safety Sense:*",
+          "Control de velocidad crucero adaptativo (ACC) de rango completo*",
+          "Sistema de pre colisión frontal (PCS)*",
+          "Sistema de alerta de cambio de carril (LDA)*",
+          "Sistema de asistencia para mantenimiento de Carril (LTA)*",
+          "Sistema de luces altas automáticas (AHB)*",
+          "Sistema de alerta de vaivén (SWS)*"
+        ],
+        "XEI 2.0 CVT": [
+          "Dynamic Force 2.0L Dual VVT-i, 4 cilindros en línea con 16 válvulas DOHC con 171 CV de potencia máxima Automático \"Direct Shift CVT\" de 10 velocidades preprogramadas",
+          "Incluye funciones selectas XLI CVT, más: Llantas de aleación de 18\"",
+          "Techo solar con apertura eléctrica",
+          "Sistema de encendido por botón (Push Start Button) y Sistema de ingreso inteligente (Smart Entry System)",
+          "Alerta de punto ciego (BSM) y Alerta de tráfico cruzado trasero (RCTA)",
+          "Sensores de estacionamiento delanteros (x4) y traseros (x4) con asistente de frenado",
+          "Aire acondicionado con climatizador automatico Bi-Zona",
+          "Espejo retrovisor interno con anti-encandilamiento automático",
+          "Cargador inalámbrico para smarthphones compatibles",
+          "Volante revestido en cuero",
+          "Levas al volante"
+        ],
+        "SEG 2.0 CVT": [
+          "Dynamic Force 2.0L Dual VVT-i, 4 cilindros en línea con 16 válvulas DOHC con 171 CV de potencia máxima Automático \"Direct Shift CVT\" de 10 velocidades preprogramadas",
+          "Incluye funciones selectas XEI CVT, más:",
+          "Asientos tapizados en cuero natural y ecológico",
+          "Asiento del conductor con regulacion electrica",
+          "Display de información múltiple Full Digital de 12.3”",
+          "Portón trasero con sistema de apertura y cierre eléctrico con sensor \"manos libres\"",
+          "Sensor de lluvia",
+          "Luces de giro secuenciales en ópticas delanteras",
+          "Iluminación interior ambiente LED en posavasos, consola central, tablero y puertas delanteras",
+          "Bandeja de baúl"
+        ]
       },
       corolla_cross_hybrid: {
-        "XEI HEV 1.8 eCVT": ["Transmisión eCVT", "Motor híbrido", "Tracción delantera"],
-        "SEG HEV 1.8 eCVT": ["Transmisión eCVT", "Motor híbrido", "Tracción delantera"]
+        "XEI HEV 1.8 eCVT": [
+          "Sistema híbrido auto-recargable 1.8L, 4 cilindros en línea con 16 válvulas DOHC con 122 CV de potencia máxima combinada Automático eCVT",
+          "Transmisión automática eCVT",
+          "Llantas de aleacion de 18”",
+          "Faros delanteros Bi-LED con regulación en altura",
+          "Sistema automático de encendido de luces",
+          "Faros antinieblas LED",
+          "Faros traseros de LED con efecto cortina",
+          "Sistema de encendido por botón (Push Start Button) y Sistema de ingreso inteligente (Smart Entry System)",
+          "4 modos de manejo: Normal, Eco, Power y EV",
+          "Espejos exteriores con regulación eléctrica, luz de giro incorporada y retráctiles automaticamente",
+          "Alerta de punto ciego (BSM) y Alerta de tráfico cruzado trasero (RCTA)",
+          "Sensores de estacionamiento delanteros (x4) y traseros (x4) con asistente de frenado",
+          "Aire acondicionado con climatizador automatico Bi-Zona",
+          "Espejo retrovisor interno con anti-encandilamiento automático",
+          "Cargador inalámbrico para smarthphones compatibles",
+          "Volante revestido en cuero",
+          "Freno de mano eletrónico con función \"Auto Hold\"",
+          "Display de información múltiple con pantalla a color de 7”",
+          "Monitor con cámara de estacionamiento",
+          "Audio con pantalla táctil de 9\" con manos libres y Bluetooth",
+          "Conectividad: AppleCar Play ® & Android Auto® inalámbrica**",
+          "Puertos USB (x2) en plazas traseras",
+          "7 airbags: frontales (x2), de rodilla (conductor), laterales (x2) y de cortina (x2)",
+          "Tuerca de seguridad para llantas",
+          "Toyota Safety Sense:*",
+          "Control de velocidad crucero adaptativo (ACC) de rango completo*",
+          "Sistema de pre colisión frontal (PCS)*",
+          "Sistema de alerta de cambio de carril (LDA)*",
+          "Sistema de asistencia para mantenimiento de Carril (LTA)*",
+          "Sistema de luces altas automáticas (AHB)*",
+          "Sistema de alerta de vaivén (SWS)*"
+        ],
+        "SEG HEV 1.8 eCVT": [
+          "Sistema híbrido auto-recargable 1.8L, 4 cilindros en línea con 16 válvulas DOHC con 122 CV de potencia máxima combinada Automático eCVT",
+          "Incluye funciones selectas XEI HEV 1.8 CVT, más:",
+          "Asientos tapizados en cuero natural y ecológico",
+          "Asiento del conductor con regulacion electrica",
+          "Display de información múltiple Full Digital de 12.3”",
+          "Portón trasero con sistema de apertura y cierre eléctrico con sensor \"manos libres\"",
+          "Sensor de lluvia",
+          "Luces de giro secuenciales en ópticas delanteras",
+          "Iluminación interior ambiente LED en posavasos, consola central, tablero y puertas delanteras",
+          "Bandeja de baúl"
+        ]
       },
       corolla_cross_gr_sport: {
-        "2.0 CVT GR-SPORT": ["Transmisión CVT", "Motor 2.0L", "Tracción delantera", "Suspensión deportiva"]
+        "2.0 CVT GR-SPORT": [
+          "Dynamic Force 2.0L Dual VVT-i, 4 cilindros en línea con 16 válvulas DOHC con 171 CV de potencia máxima Automático \"Direct Shift CVT\" de 10 velocidades preprogramadas",
+          "Incluye funciones selectas XEI CVT, más:",
+          "Asientos tapizados en cuero natural y ecológico combinado con ultrasuede y detalles en rojo",
+          "Asiento del conductor con regulacion electrica",
+          "Display de información múltiple Full Digital de 12.3”",
+          "Portón trasero con sistema de apertura y cierre eléctrico con sensor \"manos libres\"",
+          "Sensor de lluvia",
+          "Luces de giro secuenciales en ópticas delanteras",
+          "Iluminación interior ambiente LED en posavasos, consola central, tablero y puertas delanteras",
+          "Bandeja de baúl"
+        ]
       },
       sw4: {
-        "SRX 4X4 6AT 7A": ["Transmisión automática", "6 velocidades", "Tracción 4x4", "7 asientos"],
-        "DIAMOND 4X4 6AT 7A": ["Transmisión automática", "6 velocidades", "Tracción 4x4", "7 asientos", "Acabados de lujo"]
+        "SRX 4X4 6AT 7A": [
+          "Motor 2,8 litros de 4 cilindros y 16 válvulas con 204 CV de potencia máxima Automático de 6 velocidades",
+          "Sistema de ingreso inteligente (Smart Entry System) y Sistema de encendido por botón (Push Start Button)",
+          "Llantas de aleación 18\" con neumáticos 265/60 R18",
+          "Manijas exteriores y molduras en ventanillas cromadas",
+          "Aire acondicionado con climatizador automático digital bizona y salidas para plazas traseras",
+          "Butacas con tapizado de cuero natural y ecológico, con función de ventilación",
+          "Butacas con regulación eléctrica para el conductor y acompañante",
+          "Toyota Safety Sense *(1): Control de velocidad crucero adaptativo (ACC); Sistema de pre colisión frontal (PCS); Sistema de alerta de cambio de carril (LDA)",
+          "Audio con pantalla táctil de 9\" con USB y Bluetooth®",
+          "Conectividad: Android Auto® y Apple CarPlay® inalámbrica *(2)",
+          "Sistema de audio Premium JBL® con 10 parlantes y subwoofer",
+          "Monitor de sistema de visión 360° (PVM) en pantalla de audio",
+          "Portón trasero con sistema de apertura y cierre eléctrico",
+          "Espejos exteriores con desempañador",
+          "Cargador inalámbrico para smartphones*(2)",
+          "Espejo retrovisor interno con función antiencandilamiento automático",
+          "Alerta de punto ciego (BSM)",
+          "Alerta de tráfico trasero (RCTA)",
+          "Candado de seguridad para rueda de auxilio"
+        ],
+        "DIAMOND 4X4 6AT 7A": [
+          "Motor 2,8 litros de 4 cilindros y 16 válvulas con 204 CV de potencia máxima Automático de 6 velocidades",
+          "Faros delanteros Full-LED de diseño exclusivo",
+          "Luces intermitentes secuenciales",
+          "Portón trasero con sistema de apertura y cierre eléctrico con sensor \"manos libres\"",
+          "Techo Bitono negro*(1)",
+          "Iluminación interior ambiente LED",
+          "Tapizado de cuero natural y ecológico perforado color beige",
+          "USB tipo C en plazas traseras (x2)",
+          "Llave de diseño exclusivo",
+          "Cubrealfombras de diseño exclusivo \"DIAMOND\"",
+          "*(1)Solo disponible en color Blanco perlado o Gris plata metalizado."
+        ]
       },
       sw4_gr_sport: {
-        "4X4 6AT 7A": ["Transmisión automática", "6 velocidades", "Tracción 4x4", "7 asientos", "Suspensión deportiva"]
+        "4X4 6AT 7A": [
+          "Motor 2,8 litros de 4 cilindros y 16 válvulas con 224 CV de potencia máxima Automático de 6 velocidades",
+          "Faros delanteros Bi-LED",
+          "Faros traseros de LED",
+          "Sensores de estacionamiento delanteros (x2) y traseros (x4)",
+          "Cargador inalámbrico para smartphones *(1)",
+          "Estribos laterales",
+          "Aire acondicionado con climatizador automático digital bizona y salidas para plazas traseras",
+          "USB tipo C en plazas traseras (x2)",
+          "Asistencia de apertura y cierre de portón trasero",
+          "Cobertor de caja de carga",
+          "*(1) Solo para smartphones compatibles"
+        ]
       },
       hiace_furgon: {
-        "2.8 TDI 6AT 3A": ["Transmisión automática", "6 velocidades", "Motor 2.8L TDI", "3 asientos"]
+        "L1H1 2.8 TDI 6AT 3A": [
+          "Motor 2,8 litros de 4 cilindros y 16 válvulas con 177 CV de potencia máxima Automático con 6 velocidades",
+          "Portón trasero de doble hoja, vidriado, con apertura 90°/180°",
+          "Tazas plásticas",
+          "Espejos exteriores con regulación y plegado eléctrico",
+          "Audio con pantalla táctil de 8\", Bluetooth® con manos libres y USB",
+          "Conectividad Android Auto® y Apple CarPlay®",
+          "Cámara de retroceso",
+          "Apertura del tanque de combustible desde el interior",
+          "Consola de techo con luz y porta anteojos",
+          "Recubrimiento interior delantero de PVC + Cubrealfombra de PVC",
+          "Volante con regulación en altura y en profundidad",
+          "Guantera con llave",
+          "Butaca del conductor con regulación en altura, ajuste longitudinal y reclinación de respaldo",
+          "Butaca del pasajero con ajuste longitudinal y reclinación de respaldo",
+          "Bandeja central con posavasos en respaldo de pasajero central",
+          "Iluminación en espacio de carga",
+          "Salida de 12v (x2)",
+          "Volante con control de audio, de teléfono y de display de información múltiple",
+          "Testigo de conducción \"ECO\"",
+          "Computadora de abordo",
+          "Display de información múltiple con pantalla a color de 4,2\" (TFT)",
+          "Reóstato para luz del tablero",
+          "Manijas auxiliares para ascenso y descenso para pasajeros",
+          "Ganchos internos para sujeción de carga",
+          "Cierre centralizado de puertas con comando a distancia",
+          "Aire acondicionado",
+          "Luz antiniebla trasera"
+        ],
+        "L2H2 2.8 TDI 6AT 3A": [
+          "Motor 2,8 litros de 4 cilindros y 16 válvulas con 163 CV de potencia máxima Automático con 6 velocidades",
+          "Portón trasero con luneta vidriada",
+          "Tazas plásticas",
+          "Espejos exteriores con regulación y plegado eléctrico",
+          "Audio con pantalla táctil de 9\", Bluetooth® con manos libres y USB",
+          "Cámara de retroceso",
+          "Apertura del tanque de combustible desde el interior",
+          "Consola de techo con luz y porta anteojos",
+          "Recubrimiento interior delantero de PVC + Cubrealfombra de PVC",
+          "Volante con regulación en altura y en profundidad",
+          "Guantera con llave",
+          "Butaca del conductor con regulación en altura, ajuste longitudinal y reclinación de respaldo",
+          "Butaca del pasajero con ajuste longitudinal y reclinación de respaldo",
+          "Bandeja central con posavasos en respaldo de pasajero central",
+          "Iluminación en espacio de carga",
+          "Salida de 12v (x2)",
+          "Volante con control de audio, de teléfono y de display de información múltiple",
+          "Testigo de conducción \"ECO\"",
+          "Computadora de abordo",
+          "Display de información múltiple con pantalla a color de 4,2\" (TFT)",
+          "Reóstato para luz del tablero",
+          "Manijas auxiliares para ascenso y descenso para pasajeros",
+          "Ganchos internos para sujeción de carga",
+          "Cierre centralizado de puertas con comando a distancia",
+          "Aire acondicionado",
+          "Luz antiniebla trasera",
+          "Doble puerta de acceso lateral",
+          "Espejos exteriores de giro angular",
+          "Consola de techo con bandeja superior"
+        ]
       },
       hiace_commuter: {
-        "2.8 TDI 6AT 14A": ["Transmisión automática", "6 velocidades", "Motor 2.8L TDI", "14 asientos"]
+        "2.8 TDI 6AT 14A": [
+          "Motor 2,8 litros de 4 cilindros y 16 válvulas con 163 CV de potencia máxima Automático con 6 velocidades",
+          "Espejos exteriores de giro angular y eléctricamente retráctiles",
+          "Audio con pantalla táctil de 9\", Bluetooth® con manos libres y USB",
+          "Cámara de retroceso",
+          "Volante con regulación en altura y en profundidad",
+          "Asiento del conductor con regulación en altura, ajuste longitudinal y reclinación de respaldo",
+          "Asientos de pasajeros posteriores con reclinación de respaldo",
+          "Luz de cortesía LED para pasajeros",
+          "Puertos USB para plazas traseras (x6)",
+          "Bandeja con posavasos y espacio portaobjetos en respaldo de butacas traseras",
+          "Control de tracción, control de estabilidad",
+          "HAC (Asistente de arranque en pendientes)",
+          "Airbags frontales (conductor y acompañantes)",
+          "Airbag de rodilla (conductor)",
+          "Luz antiniebla trasera",
+          "Asientos posteriores con apoyabrazos en pasillo central"
+        ]
       },
       hiace_wagon: {
-        "2.8 TDI 6AT 10A": ["Transmisión automática", "6 velocidades", "Motor 2.8L TDI", "10 asientos"]
+        "2.8 TDI 6AT 10A": [
+          "Motor 2,8 litros de 4 cilindros y 16 válvulas con 163 CV de potencia máxima Automático de 6 velocidades",
+          "Faros delanteros Bi-LED con regulación automática en altura",
+          "Faros traseros de LED",
+          "Control de velocidad crucero adaptativo (ACC)",
+          "Climatizador automático digital bi zona +aire acondicionado con salidas y regulador digital para plazas traseras",
+          "Cámara de retroceso con sistema de visión 360°",
+          "Sensores de estacionamiento delanteros y traseros",
+          "Doble puerta de acceso lateral con apertura eléctrica",
+          "Asientos tapizados en cuero natural y ecológico",
+          "Segunda fila de asientos (x2) con regulación eléctrica, soporte para piernas y calefaccionados",
+          "Tercera fila de asientos (x2) con regulación longitudinal y reclinación de respaldo",
+          "Cuarta fila de asientos (x3) con regulación longitudinal, reclinación de respaldo y abatibles 60/40",
+          "Luz de cortesía LED para pasajeros",
+          "Audio con pantalla táctil de 8\" con Bluetooth® y Conectividad para Apple CarPlay® y Android Auto®",
+          "Puertos USB para plazas traseras (x6)",
+          "Espejo retrovisor con visión trasera digital, anti-encandilamiento automático y limpiador de cámara",
+          "Toyota Safety Sense (ACC + PCS + ACC + AHB)",
+          "7 Airbags",
+          "Alerta de punto ciego (BSM)",
+          "Alerta de tráfico trasero (RCTA)"
+        ]
       }
     };
 
@@ -614,7 +940,6 @@
       yaris_sedan: {
         xls: {
           "XLS 1.5 6M/T 4P": [
-            { name: "Rojo Metalizado", code: "red", hex: "#AC1625" },
             { name: "Negro Mica", code: "black", hex: "#292826" },
             { name: "Super Blanco", code: "white", hex: "#F8F8F8" },
             { name: "Gris Azulado", code: "blue", hex: "#61727B" },
@@ -623,7 +948,6 @@
             { name: "Gris Plata", code: "silver", hex: "#DCDCDE" }
           ],
           "XLS 1.5 CVT 4P": [
-            { name: "Rojo Metalizado", code: "red", hex: "#AC1625" },
             { name: "Negro Mica", code: "black", hex: "#292826" },
             { name: "Super Blanco", code: "white", hex: "#F8F8F8" },
             { name: "Gris Azulado", code: "blue", hex: "#61727B" },
@@ -632,7 +956,6 @@
             { name: "Gris Plata", code: "silver", hex: "#DCDCDE" }
           ],
           "XLS PACK 1.5 CVT 4P": [
-            { name: "Rojo Metalizado", code: "red", hex: "#AC1625" },
             { name: "Negro Mica", code: "black", hex: "#292826" },
             { name: "Super Blanco", code: "white", hex: "#F8F8F8" },
             { name: "Gris Azulado", code: "blue", hex: "#61727B" },
